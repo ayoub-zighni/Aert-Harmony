@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="nh" prefHeight="457.0" prefWidth="683.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AfficherProduitController">
+   <children>
+      <ImageView fitHeight="545.0" fitWidth="788.0" layoutX="2.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@bgf.jpg" />
+         </image>
+      </ImageView>
+      <ScrollPane layoutX="24.0" layoutY="150.0" prefHeight="290.0" prefWidth="644.0">
+         <content>
+            <VBox fx:id="vbox1" prefHeight="277.0" prefWidth="646.0" />
+         </content>
+      </ScrollPane>
+      <Pane layoutX="24.0" layoutY="100.0" prefHeight="50.0" prefWidth="644.0" style="-fx-background-color: #FF7D33;">
+         <children>
+            <Label layoutX="34.0" layoutY="18.0" text="ID" />
+            <Label layoutX="114.0" layoutY="18.0" text="NOM" />
+            <Label layoutX="171.0" layoutY="19.0" text="DESCRIPTION" />
+            <Label layoutX="289.0" layoutY="18.0" text="PRIX" />
+            <Label layoutX="356.0" layoutY="18.0" text="STOCK" />
+            <Label layoutX="438.0" layoutY="19.0" text="CATEGORY" />
+            <Label layoutX="541.0" layoutY="18.0" text="Action" />
+         </children>
+      </Pane>
+      <Button layoutX="35.0" layoutY="35.0" mnemonicParsing="false" onAction="#ReturnToHome" prefHeight="25.0" prefWidth="121.0" style="-fx-background-color: #ff9900; -fx-background-radius: 18;" text="HOME" />
+      <Button layoutX="582.0" layoutY="60.0" mnemonicParsing="false" onAction="#returnToAdd" prefHeight="33.0" prefWidth="86.0" style="-fx-background-color: #ff9900; -fx-background-radius: 18;" text="Ajouter" />
+   </children>
+</AnchorPane>
