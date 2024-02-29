@@ -1,0 +1,5 @@
+services\CommandeService.class
+models\Commande.class
+controllers\affichercommandecontroller.class
+controllers\modifiercommandecontroller.class
+controllers\ajoutercommandecontroller.class

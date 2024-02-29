@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ajoutercommandecontroller">
+   <children>
+      <TextField fx:id="statutC" layoutX="210.0" layoutY="153.0" promptText="statut de la commande" />
+      <TextField fx:id="adrLivraison" layoutX="210.0" layoutY="200.0" promptText="adresse de livraison" />
+      <Button fx:id="btnconfirmer" layoutX="241.0" layoutY="317.0" mnemonicParsing="false" onAction="#AjouterCommande" text="Confirmer">
+         <font>
+            <Font name="Berlin Sans FB Demi Bold" size="14.0" />
+         </font>
+      </Button>
+      <DatePicker fx:id="dateC" layoutX="212.0" layoutY="106.0" prefHeight="26.0" prefWidth="170.0" promptText="date de la commande " />
+      <Button fx:id="consulterC" layoutX="382.0" layoutY="33.0" mnemonicParsing="false" onAction="#AfficherCommande" text="consulter les commandes ">
+         <font>
+            <Font name="Berlin Sans FB Demi Bold" size="14.0" />
+         </font>
+      </Button>
+      <TextField fx:id="idL" layoutX="210.0" layoutY="241.0" promptText="id du livreur" />
+   </children>
+</AnchorPane>

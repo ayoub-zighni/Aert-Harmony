@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="289.0" prefWidth="435.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.modifierlivreurcontroller">
+   <children>
+      <TextField fx:id="nomupdate" layoutX="68.0" layoutY="75.0" promptText="Nom" />
+      <Text fx:id="modificationL" layoutX="168.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modification" />
+      <TextField fx:id="prenomupdate" layoutX="68.0" layoutY="119.0" promptText="Prenom" />
+      <TextField fx:id="regionupdate" layoutX="68.0" layoutY="172.0" promptText="Region" />
+      <Button fx:id="modif" layoutX="132.0" layoutY="238.0" mnemonicParsing="false" onAction="#modifierLivreur" style="-fx-background-color: orange;" text="Modifier" />
+   </children>
+</AnchorPane>
