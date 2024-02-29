@@ -1,0 +1,59 @@
+.root {
+    -fx-background-color: #f0f0f0; /* Light gray background */
+}
+
+/* TableView */
+.table-view {
+    -fx-background-color: #ffffff; /* White background */
+}
+
+/* TableView Columns */
+.table-column {
+    -fx-font-size: 14px;
+}
+
+/* Buttons */
+.button {
+    -fx-font-size: 14px;
+    -fx-background-color: #3498db; /* Blue */
+    -fx-text-fill: white;
+}
+
+/* TextFields */
+.text-field {
+    -fx-font-size: 14px;
+    -fx-background-color: #ffffff; /* White background */
+    -fx-background-radius: 5px; /* Rounded corners */
+    -fx-border-color: #ccc; /* Light gray border color */
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px; /* Rounded corners */
+}
+
+/* ChoiceBox */
+.choice-box {
+    -fx-font-size: 14px;
+}
+
+/* DatePicker */
+.date-picker {
+    -fx-font-size: 14px;
+}
+
+/* TextField for search */
+#Search {
+    -fx-font-size: 14px;
+}
+
+/* Back Button */
+.button#back-button {
+    -fx-font-size: 11px;
+    -fx-background-color: #FFA500; /* Orange */
+    -fx-text-fill: white;
+}
+
+/* Delete, Update, ClearTable Buttons */
+.button#delete-button, .button#update-button, .button#clear-button {
+    -fx-font-size: 14px;
+    -fx-background-color: #FFA500; /* Orange */
+    -fx-text-fill: white;
+}

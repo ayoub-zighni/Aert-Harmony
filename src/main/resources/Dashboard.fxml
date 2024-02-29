@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane prefHeight="442.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DashboardController">
+   <children>
+      <VBox prefHeight="447.0" prefWidth="187.0" style="-fx-background-color: #0F4C81;">
+         <children>
+            <Pane prefHeight="74.0" prefWidth="187.0" />
+            <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="202.0" text="Overview">
+               <graphic>
+                  <FontAwesomeIconView glyphName="DASHBOARD" />
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="202.0" text="Users">
+               <graphic>
+                  <FontAwesomeIconView glyphName="USERS" />
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="202.0" text="Products">
+               <graphic>
+                  <FontAwesomeIconView glyphName="SHOPPING_BAG" />
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="202.0" text="Events">
+               <graphic>
+                  <FontAwesomeIconView glyphName="CALENDAR" />
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="202.0" text="Finance">
+               <graphic>
+                  <FontAwesomeIconView glyphName="BRIEFCASE" />
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="202.0" text="Delvery servece ">
+               <graphic>
+                  <FontAwesomeIconView glyphName="TRUCK" />
+               </graphic>
+            </Button>
+            <Pane prefHeight="66.0" prefWidth="187.0" />
+            <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="202.0" text="Settings">
+               <graphic>
+                  <FontAwesomeIconView glyphName="GEAR" />
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="202.0" text="Log out">
+               <graphic>
+                  <FontAwesomeIconView glyphName="SIGN_OUT" />
+               </graphic>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

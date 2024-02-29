@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="444.0" prefWidth="479.0" stylesheets="@css/login.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
+   <children>
+      <TextField fx:id="Field1" layoutX="119.0" layoutY="138.0" prefHeight="34.0" prefWidth="239.0" promptText="Email@gmail.com" />
+      <TextField fx:id="Field2" layoutX="120.0" layoutY="205.0" prefHeight="34.0" prefWidth="239.0" promptText="Password" />
+      <Button layoutX="273.0" layoutY="259.0" mnemonicParsing="false" onAction="#connecter" prefHeight="30.0" prefWidth="88.0" text="Login" />
+      <Label fx:id="messageLabel" layoutX="119.0" layoutY="322.0" text="Label" />
+      <FontAwesomeIconView fill="#0051ff" glyphName="USER" layoutX="334.0" layoutY="162.0" size="20" />
+      <FontAwesomeIconView fill="#086dfa" glyphName="USERS" layoutX="212.0" layoutY="57.0" size="50" />
+      <Label layoutX="157.0" layoutY="74.0" prefHeight="27.0" prefWidth="190.0" text="Login to your account" textFill="#193ae1" />
+      <FontAwesomeIconView fill="#006aff" glyphName="KEY" layoutX="338.0" layoutY="229.0" size="20" />
+      <Label layoutX="120.0" layoutY="260.0" onMouseClicked="#ForgotPassword" prefHeight="27.0" prefWidth="150.0" text="Forgot password?">
+         <font>
+            <Font size="4.0" />
+         </font>
+      </Label>
+      <Label layoutX="387.0" layoutY="406.0" onMouseClicked="#addInterface" text="create  account" />
+   </children>
+</AnchorPane>

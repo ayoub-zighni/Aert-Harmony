@@ -1,0 +1,56 @@
+/* login.css */
+
+/* Apply styles to TextField */
+#Field1, #Field2 {
+    -fx-prompt-text-fill: rgb(128, 128, 128); /* Prompt text color */
+    -fx-font-size: 14px; /* Font size */
+    -fx-background-color: transparent; /* Text field background color */
+    -fx-border-color: #cccccc; /* Text field border color */
+    -fx-border-width: 0px 0px 2px 0px;
+}
+
+/* Apply styles to TextField on hover */
+#Field1:hover, #Field2:hover {
+    -fx-border-color: #0598ff; /* Text field border color on hover */
+}
+
+/* Apply styles to TextField on focus */
+#Field1:focused, #Field2:focused {
+    -fx-border-color: #0598ff; /* Text field border color on focus */
+}
+
+/* Apply styles to Button */
+Button {
+    -fx-background-color: #0598ff; /* Button background color */
+    -fx-text-fill: white; /* Button text color */
+    -fx-font-size: 14px; /* Font size */
+}
+
+/* Apply styles to Button on hover */
+Button:hover {
+    -fx-background-color: #007acc; /* Button background color on hover */
+}
+
+/* Apply styles to Label */
+Label {
+    -fx-text-fill: #333333; /* Label text color */
+    -fx-font-size: 10px; /* Font size */
+}
+
+/* Apply styles to TextArea */
+TextArea {
+    -fx-font-size: 12px; /* Font size */
+    -fx-text-fill: #333333; /* Text color */
+    -fx-background-color: transparent; /* Background color */
+    -fx-border-color: transparent; /* Border color */
+}
+
+/* Apply styles to AnchorPane */
+AnchorPane {
+    -fx-background-color: #f0f0f0; /* Background color */
+}
+
+/* Apply styles to ImageView */
+ImageView {
+    -fx-background-color: transparent; /* Background color */
+}

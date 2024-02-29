@@ -1,0 +1,67 @@
+.root {
+    -fx-background-color: #f0f0f0; /* Blue background */
+}
+
+/* Labels */
+.label {
+    -fx-font-size: 14px;
+}
+
+/* TextFields */
+.text-field {
+    -fx-font-size: 14px;
+    -fx-pref-width: 200px;
+    -fx-background-color: #CCCCCC; /* White background */
+    -fx-background-radius: 5px; /* Rounded corners */
+    -fx-border-color: #FFA500; /* Light gray border color */
+    -fx-border-width: 0px 0px 2px 0px;
+    -fx-border-radius: 5px; /* Rounded corners */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 1); /* Smooth drop shadow effect */
+}
+
+/* Buttons */
+.button {
+    -fx-font-size: 14px;
+    -fx-background-color: #3498db; /* Blue */
+    -fx-text-fill: white;
+    -fx-border-color: #000000;
+    -fx-background-insets: 0, 1, 2; /* Adding shadow effect */
+    -fx-background-radius: 5px; /* Rounded corners */
+    -fx-padding: 10px 20px; /* Padding */
+}
+
+.button:hover {
+    -fx-background-color: #5DADE2; /* Lighter blue on hover */
+}
+
+/* ChoiceBox */
+.choice-box {
+    -fx-font-size: 14px;
+    -fx-background-color: #CCCCCC; /* White background */
+    -fx-background-radius: 5px; /* Rounded corners */
+    -fx-border-color:#FFA500 ; /* Light grey border color */
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px; /* Rounded corners */
+}
+
+/* Accordion */
+.accordion {
+    -fx-background-color: #ffffff; /* White background */
+}
+
+/* Date Picker */
+.date-picker {
+    -fx-font-size: 14px;
+}
+
+/* Error Labels */
+#error-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #fc1c03; /* Red */
+}
+
+/* Success Labels */
+#success-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #01ff3c; /* Green */
+}
