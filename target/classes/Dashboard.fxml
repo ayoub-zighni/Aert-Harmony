@@ -1,14 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controllers.DashboardController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="442.0" prefWidth="600.0" stylesheets="@css/Dashboard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DashboardController">
+   <children>
+      <VBox prefHeight="447.0" prefWidth="187.0" style="-fx-background-color: #0F4C81;">
+         <children>
+            <Pane prefHeight="74.0" prefWidth="187.0">
+               <children>
+                  <Label fx:id="messageLabel" layoutX="-14.0" layoutY="-12.0" text="Art &amp; Harmony" textFill="#e2f204" />
+               </children>
+            </Pane>
+            <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="202.0" text="Overview">
+               <graphic>
+                  <FontAwesomeIconView fill="#cb8211" glyphName="DASHBOARD" text="" />
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#getTheData" prefHeight="38.0" prefWidth="202.0" text="Users">
+               <graphic>
+                  <FontAwesomeIconView fill="#cb8211" glyphName="USERS" />
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="202.0" text="Products">
+               <graphic>
+                  <FontAwesomeIconView fill="#cb8211" glyphName="SHOPPING_BAG" />
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="202.0" text="Events">
+               <graphic>
+                  <FontAwesomeIconView fill="#cb8211" glyphName="CALENDAR" />
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="202.0" text="Finance">
+               <graphic>
+                  <FontAwesomeIconView fill="#cb8211" glyphName="BRIEFCASE" />
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="202.0" text="Delvery servece ">
+               <graphic>
+                  <FontAwesomeIconView fill="#cb8211" glyphName="TRUCK" />
+               </graphic>
+            </Button>
+            <Pane prefHeight="66.0" prefWidth="187.0" />
+            <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="202.0" text="Settings">
+               <graphic>
+                  <FontAwesomeIconView fill="#cb8211" glyphName="GEAR" />
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#deconnecter" prefHeight="38.0" prefWidth="202.0" text="Log out">
+               <graphic>
+                  <FontAwesomeIconView fill="#cb8211" glyphName="SIGN_OUT" />
+               </graphic>
+            </Button>
+         </children>
+      </VBox>
+   </children>
 </AnchorPane>

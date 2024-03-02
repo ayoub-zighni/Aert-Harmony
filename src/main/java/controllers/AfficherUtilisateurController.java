@@ -91,6 +91,9 @@ public class AfficherUtilisateurController {
             ObservableList<Utilisateur> observableList = FXCollections.observableList(sortedUtilisateurs);
             tableview.setItems(observableList);
 
+            // Populate the ChoiceBox with roles
+            RoleP.setItems(FXCollections.observableArrayList(Role.values()));
+
             // Set cell value factories for each column
             idcol.setCellValueFactory(new PropertyValueFactory<>("id"));
             fnamecol.setCellValueFactory(new PropertyValueFactory<>("prenom"));
@@ -122,7 +125,7 @@ public class AfficherUtilisateurController {
                 alert.showAndWait();
             });
         }
-    }
+        }
     @FXML
     void getData(MouseEvent event) {
         Utilisateur utilisateur = tableview.getSelectionModel().getSelectedItem();
@@ -239,6 +242,15 @@ public class AfficherUtilisateurController {
         }
 
         tableview.setItems(filteredList);
+    }
+
+    public void Exit(ActionEvent actionEvent) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/Dashboard.fxml"));
+            Fname.getScene().setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace(); // Print the full stack trace
+        }
     }
 }
 

@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 public class MainFX extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Login.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/DisplayPhoto.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         // Créer une instance de AfficherPersonneController et la définir comme données utilisateur de la scène

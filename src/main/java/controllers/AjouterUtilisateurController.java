@@ -20,9 +20,12 @@ import services.UtilisateurService;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
 import javafx.scene.control.Label;
 
 import javafx.scene.Node;
@@ -73,11 +76,14 @@ public class AjouterUtilisateurController {
 
 
     public void initialize() {
-        // Create a list of Role enum values
-        ObservableList<Role> roles = FXCollections.observableArrayList(Role.values());
+        // Create a list of Role enum values excluding the Admin role
+        List<Role> roles = Arrays.stream(Role.values())
+                .filter(role -> role != Role.ADMIN)
+                .collect(Collectors.toList());
 
         // Populate the ChoiceBox with the list of roles
-        roleP.setItems(roles);
+        ObservableList<Role> rolesObservableList = FXCollections.observableArrayList(roles);
+        roleP.setItems(rolesObservableList);
 
         // Set a default value for the ChoiceBox if needed
 
@@ -216,5 +222,14 @@ public class AjouterUtilisateurController {
         // Initialize CAPTCHA
         String captchaText = generateRandomAlphabets(6); // Adjust the length as needed
         captchaLabel.setText(captchaText);
+    }
+
+    public void Back(ActionEvent actionEvent) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/AfficherUtilisateur.fxml"));
+            Fname.getScene().setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace(); // Print the full stack trace
+        }
     }
 }

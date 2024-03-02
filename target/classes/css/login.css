@@ -1,56 +1,75 @@
-/* login.css */
-
-/* Apply styles to TextField */
-#Field1, #Field2 {
-    -fx-prompt-text-fill: rgb(128, 128, 128); /* Prompt text color */
-    -fx-font-size: 14px; /* Font size */
-    -fx-background-color: transparent; /* Text field background color */
-    -fx-border-color: #cccccc; /* Text field border color */
-    -fx-border-width: 0px 0px 2px 0px;
+.button {
+    -fx-background-color: #0f4c81; /* Set button background color */
+    -fx-text-fill: white; /* Set text color to white */
+    -fx-alignment: center; /* Center align the text */
+    -fx-padding: 8px 16px; /* Adjust padding for smaller size */
+    -fx-font-size: 12px; /* Decrease font size */
+    -fx-border-radius: 3px; /* Apply smaller border radius */
+    -fx-background-radius: 3px; /* Apply background radius */
 }
 
-/* Apply styles to TextField on hover */
-#Field1:hover, #Field2:hover {
-    -fx-border-color: #0598ff; /* Text field border color on hover */
+/* Hover effect */
+.button:hover {
+    -fx-background-color: #388E3C; /* Darken the background color on hover */
 }
 
-/* Apply styles to TextField on focus */
-#Field1:focused, #Field2:focused {
-    -fx-border-color: #0598ff; /* Text field border color on focus */
+/* Apply styles to FontAwesomeIconView */
+.icon {
+    -fx-fill: #CB8211FF; /* Set icon color */
+    -fx-font-size: 24px; /* Set icon size */
 }
 
-/* Apply styles to Button */
-Button {
-    -fx-background-color: #0598ff; /* Button background color */
-    -fx-text-fill: white; /* Button text color */
-    -fx-font-size: 14px; /* Font size */
+/* Style the VBox */
+.vbox {
+    -fx-spacing: 10; /* Add spacing between buttons */
 }
 
-/* Apply styles to Button on hover */
-Button:hover {
-    -fx-background-color: #007acc; /* Button background color on hover */
+/* Hover effect */
+.button:hover {
+    -fx-background-color: #388E3C; /* Darken the background color on hover */
 }
 
-/* Apply styles to Label */
-Label {
-    -fx-text-fill: #333333; /* Label text color */
-    -fx-font-size: 10px; /* Font size */
+.label {
+    -fx-text-fill: #CB8211FF; /* Set label text color */
+    -fx-font-family: "Arial", sans-serif; /* Set font family */
+    -fx-font-size: 18px; /* Set font size */
+    -fx-font-weight: bold; /* Make the text bold */
+    -fx-padding: 20 20 10 20; /* Add padding */
+    -fx-alignment: center; /* Center align the text */
 }
 
-/* Apply styles to TextArea */
-TextArea {
-    -fx-font-size: 12px; /* Font size */
-    -fx-text-fill: #333333; /* Text color */
-    -fx-background-color: transparent; /* Background color */
-    -fx-border-color: transparent; /* Border color */
+.text-field {
+    -fx-background-color: transparent; /* Make the text field background transparent */
+    -fx-border-width: 0 0 1 0; /* Set border width for bottom border only */
+    -fx-border-color: transparent transparent #CB8211FF transparent; /* Set transparent bottom border */
+    -fx-text-fill: black; /* Set text color to white */
+    -fx-font-size: 14px; /* Set font size */
+    -fx-padding: 5px 10px; /* Add padding */
+    -fx-background-insets: 0; /* Remove background insets */
 }
 
-/* Apply styles to AnchorPane */
-AnchorPane {
-    -fx-background-color: #f0f0f0; /* Background color */
+.text-field:hover {
+    -fx-border-color: transparent transparent #CB8211FF transparent; /* Set border color on hover */
 }
 
-/* Apply styles to ImageView */
-ImageView {
-    -fx-background-color: transparent; /* Background color */
+.text-field:focused {
+    -fx-border-color: transparent transparent #CB8211FF transparent; /* Set border color when focused */
+}
+
+login-label {
+    -fx-text-fill:  #0F4C81; /* Set specific label text color */
+    -fx-font-size: 20px; /* Set specific label font size */
+    -fx-font-weight: bold; /* Make the text bold */
+}
+
+.underline-label {
+    -fx-text-fill: #CB8211FF; /* Set underline label text color */
+    -fx-font-size: 10px; /* Set underline label font size */
+    -fx-underline: true; /* Add underline */
+    -fx-cursor: hand; /* Change cursor to hand on hover */
+}
+
+.message-label {
+    -fx-text-fill: #CB8211FF; /* Set text color to match the theme */
+    -fx-font-size: 12px; /* Set font size */
 }

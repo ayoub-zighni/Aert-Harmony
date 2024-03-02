@@ -13,7 +13,7 @@
     -fx-pref-width: 200px;
     -fx-background-color: #CCCCCC; /* White background */
     -fx-background-radius: 5px; /* Rounded corners */
-    -fx-border-color: #FFA500; /* Light gray border color */
+    -fx-border-color: #CB8211FF; /* Light gray border color */
     -fx-border-width: 0px 0px 2px 0px;
     -fx-border-radius: 5px; /* Rounded corners */
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 1); /* Smooth drop shadow effect */
@@ -21,17 +21,13 @@
 
 /* Buttons */
 .button {
-    -fx-font-size: 14px;
-    -fx-background-color: #3498db; /* Blue */
+    -fx-background-color: #0F4C81; /* Navy blue background */
     -fx-text-fill: white;
-    -fx-border-color: #000000;
-    -fx-background-insets: 0, 1, 2; /* Adding shadow effect */
-    -fx-background-radius: 5px; /* Rounded corners */
-    -fx-padding: 10px 20px; /* Padding */
 }
 
+/* Set background color of the buttons when hovered */
 .button:hover {
-    -fx-background-color: #5DADE2; /* Lighter blue on hover */
+    -fx-background-color: #CB8211FF; /* Lighter orange when hovered */
 }
 
 /* ChoiceBox */
@@ -39,7 +35,7 @@
     -fx-font-size: 14px;
     -fx-background-color: #CCCCCC; /* White background */
     -fx-background-radius: 5px; /* Rounded corners */
-    -fx-border-color:#FFA500 ; /* Light grey border color */
+    -fx-border-color:#CB8211FF ; /* Light grey border color */
     -fx-border-width: 1px;
     -fx-border-radius: 5px; /* Rounded corners */
 }
@@ -52,6 +48,7 @@
 /* Date Picker */
 .date-picker {
     -fx-font-size: 14px;
+    -fx-border-color:#CB8211FF;
 }
 
 /* Error Labels */
@@ -64,4 +61,23 @@
 #success-label {
     -fx-font-size: 12px;
     -fx-text-fill: #01ff3c; /* Green */
+}
+
+#captchaField {
+    -fx-background-color: #fff; /* White background */
+    -fx-border-color: #CB8211FF; /* Lighter orange border */
+    -fx-border-width: 1px;
+    -fx-font-family: "Courier New", monospace; /* Use a monospace font */
+    -fx-font-size: 16px; /* Larger font size */
+    -fx-padding: 5px; /* Add padding */
+    -fx-text-fill: #000; /* Black text */
+    -fx-text-alignment: center; /* Center text */
+}
+.captcha-label {
+    font-family: Arial, sans-serif; /* Choose your preferred font family */
+    font-size: 16px; /* Adjust the font size as needed */
+    color: #333; /* Set the text color */
+    margin-bottom: 10px; /* Add spacing below the label */
+    display: block; /* Ensure the label appears on a new line */
+    /* Add more styling properties as needed */
 }

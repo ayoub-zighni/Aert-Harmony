@@ -1,59 +1,50 @@
-.root {
-    -fx-background-color: #f0f0f0; /* Light gray background */
+.anchor-pane {
+    -fx-background-color: #0F4C81; /* Dark blue */
 }
 
-/* TableView */
-.table-view {
-    -fx-background-color: #ffffff; /* White background */
-}
-
-/* TableView Columns */
-.table-column {
-    -fx-font-size: 14px;
-}
-
-/* Buttons */
 .button {
-    -fx-font-size: 14px;
-    -fx-background-color: #3498db; /* Blue */
+    -fx-background-color: #0F4C81; /* Navy blue background */
     -fx-text-fill: white;
 }
 
-/* TextFields */
-.text-field {
-    -fx-font-size: 14px;
-    -fx-background-color: #ffffff; /* White background */
-    -fx-background-radius: 5px; /* Rounded corners */
-    -fx-border-color: #ccc; /* Light gray border color */
-    -fx-border-width: 1px;
-    -fx-border-radius: 5px; /* Rounded corners */
+/* Set background color of the buttons when hovered */
+.button:hover {
+    -fx-background-color: #CB8211FF; /* Lighter orange when hovered */
+}
+.table-column .label {
+    -fx-text-fill: white; /* White text */
+    -fx-background-color: #0F4C81; /* Navy blue background for column headers */
 }
 
-/* ChoiceBox */
+/* Set text color of the labels */
+.label {
+    -fx-text-fill: white; /* White text */
+}
+
+/* Set text color of the text fields */
+.text-field {
+    -fx-text-fill: black; /* White text */
+    -fx-border-color: #CB8211FF ;
+}
+
+/* Set text color of the choice box */
 .choice-box {
     -fx-font-size: 14px;
+    -fx-background-color: #CCCCCC; /* White background */
+    -fx-background-radius: 5px; /* Rounded corners */
+    -fx-border-color:#CB8211FF ; /* Light grey border color */
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px; /* Rounded corners */
+    -fx-text-fill: black; /* Set text color to black */
 }
-
-/* DatePicker */
+/* Set color of the date picker */
 .date-picker {
-    -fx-font-size: 14px;
+    -fx-text-fill: black; /* White text */
+    -fx-border-color: #CB8211FF ;
 }
 
-/* TextField for search */
-#Search {
-    -fx-font-size: 14px;
-}
-
-/* Back Button */
-.button#back-button {
-    -fx-font-size: 11px;
-    -fx-background-color: #FFA500; /* Orange */
-    -fx-text-fill: white;
-}
-
-/* Delete, Update, ClearTable Buttons */
-.button#delete-button, .button#update-button, .button#clear-button {
-    -fx-font-size: 14px;
-    -fx-background-color: #FFA500; /* Orange */
-    -fx-text-fill: white;
+/* Set text color and size of the font awesome icons */
+.font-awesome-icon-view {
+    -fx-fill: #0F4C81; /* Dark blue for icons */
+    -fx-font-size: 15px; /* Font size */
 }

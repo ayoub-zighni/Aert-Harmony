@@ -125,5 +125,54 @@ public class UtilisateurService implements IService<Utilisateur> {
         return null; // Return null if login fails
     }
     // Update the password for the user with the given email
-}
+    public void changerMotDePasse(String email, String ancienMotDePasse, String nouveauMotDePasse) throws SQLException {
+        // First, check if the user with the given email exists
+        Utilisateur utilisateur = getUserByEmail(email);
+        if (utilisateur != null) {
+            // If the user exists, verify the old password
+            if (utilisateur.getMdp().equals(ancienMotDePasse)) {
+                // If the old password matches, update the password
+                String sql = "UPDATE user SET mdp = ? WHERE email = ?";
+                try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                    ps.setString(1, nouveauMotDePasse);
+                    ps.setString(2, email);
+                    int rowsUpdated = ps.executeUpdate();
+                    if (rowsUpdated > 0) {
+                        System.out.println("Mot de passe mis à jour avec succès pour l'utilisateur avec l'email: " + email);
+                    } else {
+                        System.out.println("Échec de la mise à jour du mot de passe pour l'utilisateur avec l'email: " + email);
+                    }
+                }
+            } else {
+                // If the old password is incorrect
+                System.out.println("Échec de la mise à jour du mot de passe. Le mot de passe précédent est incorrect.");
+            }
+        } else {
+            // If the user does not exist
+            System.out.println("Échec de la mise à jour du mot de passe. L'utilisateur avec l'email " + email + " n'existe pas.");
+        }
+    }
 
+    // Method to retrieve user by email
+    private Utilisateur getUserByEmail(String email) throws SQLException {
+        String sql = "SELECT * FROM user WHERE email = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, email);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    Utilisateur utilisateur = new Utilisateur();
+                    utilisateur.setId(rs.getInt("id"));
+                    utilisateur.setPrenom(rs.getString("prenom"));
+                    utilisateur.setNom(rs.getString("nom"));
+                    utilisateur.setEmail(rs.getString("email"));
+                    utilisateur.setMdp(rs.getString("mdp"));
+                    utilisateur.setDateNaissance(rs.getObject("dateNaissance", LocalDate.class));
+                    String roleName = rs.getString("role");
+                    Role role = Role.fromString(roleName != null ? roleName : "BROWSER");
+                    utilisateur.setRole(role);
+                    return utilisateur; // Return the utilisateur if found
+                }
+            }
+        }
+        return null; // Return null if user not found
+    }}
