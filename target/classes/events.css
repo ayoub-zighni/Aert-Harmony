@@ -1,0 +1,56 @@
+/* Boutons */
+.button, #ajouterButton, #modifierButton, #supprimerButton {
+    -fx-background-color: transparent;
+    -fx-text-fill: #fff;
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+    -fx-background-radius: 30px;
+    -fx-border-radius: 30px;
+    -fx-padding: 10px 20px;
+    -fx-border-color: #fff;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
+}
+
+.button:hover, #ajouterButton:hover, #modifierButton:hover, #supprimerButton:hover {
+    -fx-background-color: #fff;
+    -fx-text-fill: #40E0D0;
+    -fx-border-color: #40E0D0;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
+}
+
+.button:pressed, #ajouterButton:pressed, #modifierButton:pressed, #supprimerButton:pressed {
+    -fx-background-color: #40E0D0;
+    -fx-text-fill: #fff;
+    -fx-border-color: #40E0D0;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
+}
+
+/* Cases */
+.text-field, #nomE, #dateE, #heureE, #descriptionE, #GalerieidG {
+    -fx-background-color: transparent;
+    -fx-text-fill: #000;
+    -fx-font-size: 10px;
+    -fx-font-family: "Arial";
+    -fx-background-radius: 30px;
+    -fx-border-radius: 30px;
+    -fx-padding: 10px 20px;
+    -fx-border-color: #fff;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
+}
+
+.text-field:hover, #nomE:hover, #dateE:hover, #heureE:hover, #descriptionE:hover, #GalerieidG:hover {
+    -fx-background-color: #fff;
+    -fx-text-fill: #40E0D0;
+    -fx-border-color: #40E0D0;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
+}
+
+.text-field:pressed, #nomE:pressed, #dateE:pressed, #heureE:pressed, #descriptionE:pressed, #GalerieidG:pressed {
+    -fx-background-color: #40E0D0;
+    -fx-text-fill: #fff;
+    -fx-border-color: #40E0D0;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );
+}
+
