@@ -1,0 +1,21 @@
+/* Boutons */
+.root {
+    -fx-background-color: #0F4C81; /* Bleu ciel clair */
+}
+.button {
+    -fx-background-color: #0F4C81; /* Change the background color here */
+    -fx-text-fill: #fff;
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+    -fx-border-color: transparent;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 10, 0, 0, 1);
+}
+
+.button:hover {
+    -fx-text-fill: #cb8211;
+}
+
+.button:pressed {
+    -fx-text-fill: #fff;
+}

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane alignment="center" hgap="10" prefHeight="517.0" prefWidth="418.0" vgap="10" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FactureController">
+    <stylesheets>
+        <URL value="@events.css" />
+    </stylesheets>
+    <Label text="Client:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+    <TextField fx:id="clientField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+    <Label text="Caissier:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+    <TextField fx:id="caissierField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+    <Label text="Montant:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+
+    <Label text="Perçu:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+    <TextField fx:id="percuField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+
+
+    <Button onAction="#ajouterFacture" text="Ajouter Facture" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="6" />
+
+
+    <Button onAction="#voirFacture" text="Voir Facture" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="7" />
+   <Label fx:id="montantLabel" text="" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+    <ImageView fx:id="promotion" fitHeight="122.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+   <Button fx:id="payer9" mnemonicParsing="false" onAction="#neufmois" text="payer sur 9 mois" GridPane.rowIndex="8" />
+   <Button fx:id="payer12" mnemonicParsing="false" onAction="#douzemoins" text="payer sur 12 mois" GridPane.rowIndex="9" />
+   <Button fx:id="payer24" mnemonicParsing="false" onAction="#quatremois" text="payer sur 24 mois" GridPane.rowIndex="10" />
+   <TextField fx:id="montant9" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+   <TextField fx:id="montant12" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+   <TextField fx:id="montant24" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+   <Button mnemonicParsing="false" onAction="#AddCommande" text="Passer commande" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+    <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints vgrow="NEVER" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+   </rowConstraints>
+</GridPane>
