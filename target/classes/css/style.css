@@ -1,0 +1,60 @@
+.button {
+    -fx-background-color: #4CAF50; /* Set button background color */
+    -fx-text-fill: white; /* Set text color to white */
+    -fx-alignment: center; /* Center align the text */
+    -fx-padding: 10 20; /* Add padding to the buttons */
+    -fx-font-size: 14px; /* Set font size */
+    -fx-border-radius: 5px; /* Apply border radius */
+}
+
+/* Apply styles to FontAwesomeIconView */
+.icon {
+    -fx-fill: #CB8211FF; /* Set icon color */
+    -fx-font-size: 24px; /* Set icon size */
+}
+
+/* Style the VBox */
+.vbox {
+    -fx-spacing: 10; /* Add spacing between buttons */
+}
+
+/* Hover effect */
+.button:hover {
+    -fx-background-color: #388E3C; /* Darken the background color on hover */
+}
+
+.label {
+    -fx-text-fill: #CB8211FF; /* Set label text color */
+    -fx-font-family: "Arial", sans-serif; /* Set font family */
+    -fx-font-size: 18px; /* Set font size */
+    -fx-font-weight: bold; /* Make the text bold */
+    -fx-padding: 20 20 10 20; /* Add padding */
+    -fx-alignment: center; /* Center align the text */
+}
+
+.text-field {
+    -fx-background-color: transparent; /* Make the text field background transparent */
+    -fx-border-color: #CB8211FF; /* Set border color */
+    -fx-border-width: 1px; /* Set border width */
+    -fx-border-radius: 5px; /* Apply border radius */
+    -fx-text-fill: white; /* Set text color to white */
+    -fx-font-size: 14px; /* Set font size */
+    -fx-padding: 5px 10px; /* Add padding */
+}
+
+.text-field:hover {
+    -fx-border-color: #CB8211FF; /* Set border color on hover */
+}
+
+.login-label {
+    -fx-text-fill: #193ae1; /* Set specific label text color */
+    -fx-font-size: 20px; /* Set specific label font size */
+    -fx-font-weight: bold; /* Make the text bold */
+}
+
+.underline-label {
+    -fx-text-fill: #CB8211FF; /* Set underline label text color */
+    -fx-font-size: 16px; /* Set underline label font size */
+    -fx-underline: true; /* Add underline */
+    -fx-cursor: hand; /* Change cursor to hand on hover */
+}p

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FactureViewController">
+    <TableView fx:id="factureTableView" layoutX="127.0" prefHeight="462.0" prefWidth="474.0">
+        <columns>
+            <TableColumn fx:id="idfacture" text="ID" />
+            <TableColumn fx:id="clientColumn" text="Client" />
+            <TableColumn fx:id="caissierColumn" text="Caissier" />
+            <TableColumn fx:id="montantColumn" text="Montant" />
+            <TableColumn fx:id="percuColumn" text="Perçu" />
+            <TableColumn fx:id="renduColumn" text="Rendu" />
+        </columns>
+    </TableView>
+    <TextField fx:id="clientField" layoutX="14.0" layoutY="32.0" prefHeight="26.0" prefWidth="110.0" />
+    <TextField fx:id="caissierField" layoutX="14.0" layoutY="83.0" prefHeight="26.0" prefWidth="110.0" />
+    <TextField fx:id="montantField" layoutX="14.0" layoutY="139.0" prefHeight="26.0" prefWidth="110.0" />
+    <TextField fx:id="percuField" layoutX="14.0" layoutY="200.0" prefHeight="26.0" prefWidth="110.0" />
+    <TextField fx:id="renduField" layoutX="14.0" layoutY="247.0" prefHeight="26.0" prefWidth="110.0" />
+    <Button layoutX="9.0" layoutY="322.0" onAction="#modifierFacture" prefHeight="26.0" prefWidth="103.0" text="Modifier" />
+    <Button layoutX="14.0" layoutY="387.0" onAction="#supprimerFacture" prefHeight="26.0" prefWidth="94.0" text="payer" />
+    <Button layoutX="13.0" layoutY="454.0" onAction="#generatePDF" text="Download PDF" />
+   <Button fx:id="apply" layoutX="489.0" layoutY="522.0" mnemonicParsing="false" onAction="#applypromo" prefHeight="26.0" prefWidth="84.0" text="apply" />
+   <TextField fx:id="codepromo" layoutX="423.0" layoutY="467.0" />
+
+</AnchorPane>
