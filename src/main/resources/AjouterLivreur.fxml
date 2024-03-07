@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="606.0" prefWidth="916.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ajouterlivreurcontroller">
+   <stylesheets>
+      <URL value="@styles.css" />
+   </stylesheets>
+   <children>
+      <ImageView fitHeight="606.0" fitWidth="916.0">
+         <image>
+            <Image url="@../../../../0f4c81.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="nom" layoutX="24.0" layoutY="73.0" promptText="nom" />
+      <TextField fx:id="prenom" layoutX="24.0" layoutY="172.0" promptText="prenom" />
+      <TextField fx:id="region" layoutX="24.0" layoutY="261.0" promptText="region" />
+      <Button fx:id="ajouter" layoutX="465.0" layoutY="259.0" mnemonicParsing="false" onAction="#AjouterLivreur" text="ajouter" />
+      <Label fx:id="fill" layoutX="64.0" layoutY="417.0" prefHeight="18.0" prefWidth="300.0" wrapText="true" />
+      <TextField fx:id="email" layoutX="24.0" layoutY="355.0" promptText="email" />
+      <TextField fx:id="telephone" layoutX="23.0" layoutY="451.0" prefHeight="29.0" prefWidth="150.0" promptText="telephone" />
+   </children>
+</AnchorPane>
