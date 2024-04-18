@@ -1,0 +1,38 @@
+{% extends 'evenements/backOffice/mainPage.html.twig' %}
+{% block form %}
+<div class="col-md-6 grid-margin stretch-card">
+    <div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Edit Event</h4>
+        {{form_start(editEventForm,{'attr':{'methode':'POST','novalidate': 'novalidate','class' : 'forms-sample'}})}}
+        <div class="form-group">
+            <label for="exampleInputUsername1">Name</label>
+            {{ form_widget(editEventForm.nom, {'attr': {'placeholder': 'Add a Name', 'class': 'form-control'}}) }}
+            <span style="color: red;">{{ form_errors(editEventForm.nom,{'attr': {'style' : 'color: red;'}}) }}</span>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Date</label>
+            {{ form_widget(editEventForm.date, {'attr': {'placeholder': 'Add Address', 'class': 'form-control'}}) }}
+            <span style="color: red;">{{ form_errors(editEventForm.date,{'attr': {'style' : 'color: red;'}}) }}</span>
+        </div>
+        <div class="form-group">
+           <label for="exampleInputEmail1">Hour</label>
+            {{ form_widget(editEventForm.heure, {'attr': {'placeholder': 'Add a country', 'class': 'form-control'}}) }}
+            <span style="color: red;">{{ form_errors(editEventForm.heure,{'attr': {'style' : 'color: red;'}}) }}</span>
+        </div>
+        <div class="form-group">
+           <label for="exampleInputEmail1">Descripion</label>
+            {{ form_widget(editEventForm.description, {'attr': {'placeholder': 'Description', 'class': 'form-control'}}) }}
+            <span style="color: red;">{{ form_errors(editEventForm.description,{'attr': {'style' : 'color: red;'}}) }}</span>
+        </div>
+        <div class="form-group">
+           <label for="exampleInputEmail1">Image</label>
+            {{ form_widget(editEventForm.image, {'attr': {'placeholder': 'Capacity', 'class': 'form-control'}}) }}
+            <span style="color: red;">{{ form_errors(editEventForm.image,{'attr': {'style' : 'color: red;'}}) }}</span>
+        </div>
+        <button type="submit" class="btn btn-primary me-2">Submit</button>
+        {{ form_end(editEventForm) }}
+    </div>
+    </div>
+</div>
+{% endblock %}

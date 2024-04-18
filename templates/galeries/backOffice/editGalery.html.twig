@@ -1,0 +1,43 @@
+{% extends 'galeries/backOffice/mainPage.html.twig' %}
+{% block form %}
+<div class="col-md-6 grid-margin stretch-card">
+    <div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Edit Galerie</h4>
+        {{form_start(editGalerieForm,{'attr':{'methode':'POST','novalidate': 'novalidate','class' : 'forms-sample'}})}}
+        <div class="form-group">
+            <label for="exampleInputUsername1">Name</label>
+            {{ form_widget(editGalerieForm.nom, {'attr': {'placeholder': 'Add a Name', 'class': 'form-control'}}) }}
+            <span style="color: red;">{{ form_errors(editGalerieForm.nom,{'attr': {'style' : 'color: red;'}}) }}</span>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Address</label>
+            {{ form_widget(editGalerieForm.adresse, {'attr': {'placeholder': 'Add Address', 'class': 'form-control'}}) }}
+            <span style="color: red;">{{ form_errors(editGalerieForm.adresse,{'attr': {'style' : 'color: red;'}}) }}</span>
+        </div>
+        <div class="form-group">
+             <label for="exampleInputEmail1">City</label>
+            {{ form_widget(editGalerieForm.ville, {'attr': {'placeholder': 'Add a city', 'class': 'form-control'}}) }}
+            <span style="color: red;">{{ form_errors(editGalerieForm.ville,{'attr': {'style' : 'color: red;'}}) }}</span>
+        </div>
+        <div class="form-group">
+           <label for="exampleInputEmail1">Country</label>
+            {{ form_widget(editGalerieForm.pays, {'attr': {'placeholder': 'Add a country', 'class': 'form-control'}}) }}
+            <span style="color: red;">{{ form_errors(editGalerieForm.pays,{'attr': {'style' : 'color: red;'}}) }}</span>
+        </div>
+        <div class="form-group">
+           <label for="exampleInputEmail1">Capacity Max</label>
+            {{ form_widget(editGalerieForm.capaciteMax, {'attr': {'placeholder': 'Capacity', 'class': 'form-control'}}) }}
+            <span style="color: red;">{{ form_errors(editGalerieForm.capaciteMax,{'attr': {'style' : 'color: red;'}}) }}</span>
+        </div>
+        <div class="form-group">
+           <label for="exampleInputEmail1">Image</label>
+            {{ form_widget(editGalerieForm.image, {'attr': {'placeholder': 'Capacity', 'class': 'form-control'}}) }}
+            <span style="color: red;">{{ form_errors(editGalerieForm.image,{'attr': {'style' : 'color: red;'}}) }}</span>
+        </div>
+        <button type="submit" class="btn btn-primary me-2">Submit</button>
+        {{ form_end(editGalerieForm) }}
+    </div>
+    </div>
+</div>
+{% endblock %}
