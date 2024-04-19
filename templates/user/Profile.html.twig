@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} My Profile{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>User Details</h1>
+
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <tbody>
+                <tr>
+                    <th class="text-end">Nom</th>
+                    <td>{{ user.nom }}</td>
+                </tr>
+                <tr>
+                    <th class="text-end">Prénom</th>
+                    <td>{{ user.prenom }}</td>
+                </tr>
+                <tr>
+                    <th class="text-end">Username</th>
+                    <td>{{ user.username }}</td>
+                </tr>
+                <tr>
+                    <th class="text-end">Email</th>
+                    <td>{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <th class="text-end">Birthdate</th>
+                    <td>{{ user.birthdate ? user.birthdate|date('Y-m-d') : '' }}</td>
+                </tr>
+                <tr>
+                    <th class="text-end">Phone</th>
+                    <td>{{ user.phone }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <a href="{{ path('app_user_Update', {'id': user.id}) }}" class="btn btn-primary">Make changes</a>
+    </div>
+{% endblock %}
