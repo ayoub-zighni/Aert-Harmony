@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Facture{% endblock %}
+
+{% block body %}
+    <h1>Facture</h1>
+
+    <table class="table">
+        <tbody>
+           
+            <tr>
+                <th>Client</th>
+                <td>{{ facture.client }}</td>
+            </tr>
+            <tr>
+                <th>Caissier</th>
+                <td>{{ facture.caissier }}</td>
+            </tr>
+            <tr>
+                <th>Montant</th>
+                <td>{{ facture.montant }}</td>
+            </tr>
+            <tr>
+                <th>Percu</th>
+                <td>{{ facture.percu }}</td>
+            </tr>
+            <tr>
+                <th>Rendu</th>
+                <td>{{ facture.rendu }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <form id="divisionForm">
+        <label for="months">Choose number of months:</label>
+        <select id="months">
+            <option value="9">9</option>
+            <option value="12">12</option>
+            <option value="24">24</option>
+        </select>
+        <br>
+        <label for="result">Result:</label>
+        <input type="text" id="result" readonly>
+    </form>
+
+    <a href="{{ path('app_facture_index') }}">back to list</a>
+
+    <a href="{{ path('app_facture_edit', {'id': facture.id}) }}">edit</a>
+
+    {{ include('facture/_delete_form.html.twig') }}
+
+    <script>
+        document.getElementById('months').addEventListener('change', function() {
+            var montant = {{ facture.montant }};
+            var months = parseInt(this.value);
+            var result = montant / months;
+
+            // Adjust result based on selected number of months
+            if (months === 9) {
+                result += montant * 0.10; // Add 10%
+            } else if (months === 12) {
+                result += montant * 0.15; // Add 15%
+            } else if (months === 24) {
+                result += montant * 0.20; // Add 20%
+            }
+
+            document.getElementById('result').value = result.toFixed(2);
+        });
+    </script>
+{% endblock %}
