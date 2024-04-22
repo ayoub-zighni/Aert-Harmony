@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produits index{% endblock %}
+
+
+
+{% block body %}
+<section class="blog-area section-gap" id="blog">
+<div class="row mb-4 mt-4 justify-content-center align-items-center">
+                        <div class="col-md-8"> <!-- Input column (75%) -->
+                            <form class="form-inline">
+                                <input type="text" class="form-control w-100" placeholder="Search product"> <!-- Set width to 100% -->
+                            </form>
+                        </div>
+                        <div class="col-md-2"> <!-- Submit button column (20%) -->
+                            <form class="form-inline">
+                                <button type="submit" class="btn btn-primary w-100 ml-2">Search</button> <!-- Set width to 100%, add 2% margin to the left -->
+                            </form>
+                        </div>
+                    </div>		
+				<div class="container">
+							
+                    
+					<div class="row">
+            {% for produit in produits %}
+
+<div class="col-lg-3 col-md-6 single-blog border ">
+
+							<div class="thumb">
+								<img class="img-fluid" src="{{ asset('uploads/'~produit.image) }}" alt="">								
+							</div>
+                            <div class="row justify-content-around align-items-center">
+							<p class="date">{{ produit.idcategorie.nom }}</p>
+                            <small class="mt-2" > {{ produit.stock ~ '  in stock'}}</small>
+							<small  class="mt-2"> {{ produit.prix ~ '.0$'}}</small>
+
+                            </div>
+                            <div class="row justify-content-between align-items-center ml-2 mr-2">
+							<a href="{{ path('app_produits_show',{id:produit.id})}}"><h4>{{ produit.nom }}</h4></a>
+
+                            </div>
+							<p>
+								{{ produit.description }}
+							</p>
+							<div class="meta-bottom d-flex justify-content-between">
+								<p><span class="lnr lnr-heart"></span> 15 Likes</p>
+								<p><span class="lnr lnr-bubble"></span> 02 Comments</p>
+							</div>									
+						</div>
+
+
+                          {% endfor %}
+	</div>
+				</div>	
+			</section>
+                          {%endblock %}

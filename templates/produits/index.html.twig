@@ -1,0 +1,60 @@
+{% extends 'dashboard.html.twig' %} 
+
+{% block title %}Produits index{% endblock %}
+   {% block nav %}
+    <li class="nav-item active">
+      <a class="nav-link" href="{{ path('admin_produits_index')}}">
+        <i class="mdi mdi-grid-large menu-icon"></i>
+        <span class="menu-title">Produits</span>
+      </a>
+    </li>
+    <li class="nav-item ">
+      <a class="nav-link" href="{{ path('app_categorie_index')}}">
+        <i class="mdi mdi-grid-large menu-icon"></i>
+        <span class="menu-title">Categories</span>
+      </a>
+    </li>
+    {% endblock %}
+
+
+{% block body %}
+    <div class="container">
+        <h1>Produits index</h1>
+        <a href="{{ path('app_produits_new') }}" class="btn btn-success w-100 mb-4 mt-4">Create new</a>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th>Image</th>
+                    <th>Prix</th>
+                    <th>Stock</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for produit in produits %}
+                <tr>
+                    <td>{{ produit.id }}</td>
+                    <td>{{ produit.nom }}</td>
+                    <td>{{ produit.description }}</td>
+                <td><img class="img-fluid" src="{{ asset('uploads/'~produit.image)}}" alt=""></td>
+                    <td>{{ produit.prix }}</td>
+                    <td>{{ produit.stock }}</td>
+                    <td>
+                        <a href="{{ path('admin_produits_show', {'id': produit.id}) }}" class="btn btn-info btn-sm">Show</a>
+                        <a href="{{ path('app_produits_edit', {'id': produit.id}) }}" class="btn btn-primary btn-sm">Edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">No records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+{% endblock %}
