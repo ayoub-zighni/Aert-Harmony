@@ -43,11 +43,11 @@
       </a>
     </div>
   </div>
-  <div class="navbar-menu-wrapper d-flex align-items-top">
+  <div class="navbar-menu-wrapper d-flex align-items-top"> 
     <ul class="navbar-nav">
       <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
-        <h1 class="welcome-text">Good Morning, <span class="text-black fw-bold">John Doe</span></h1>
-        <h3 class="welcome-sub-text">Your performance summary this week </h3>
+        <h1 class="welcome-text">Admin, <span class="text-black fw-bold">Bouali Chedi</span></h1>
+       
       </li>
     </ul>
     <ul class="navbar-nav ms-auto">
@@ -346,8 +346,73 @@
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="row">
-                {% block body %}
-                {% endblock %}
+
+
+<style>
+  .chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh; /* Adjust if needed */
+  }
+
+  canvas {
+    max-width: 100%; /* Ensure canvas doesn't exceed container width */
+    max-height: 100%; /* Ensure canvas doesn't exceed container height */
+  }
+</style>
+
+<div class="chart-container">
+  <canvas id="myChart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const ctx = document.getElementById('myChart');
+
+  // Fetch data from Symfony endpoint
+  fetch('/api/galeries-data')
+    .then(response => response.json())
+    .then(data => {
+      new Chart(ctx, {
+        type: 'doughnut', // Change 'bar' to 'pie' for a pie chart or 'doughnut' for a doughnut chart
+        data: {
+          labels: data.labels,
+          datasets: [{
+            label: 'Capacity',
+            data: data.data,
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          },
+          responsive: false,
+          maintainAspectRatio: false,
+          width: 400, // Adjust as needed
+          height: 400 // Adjust as needed
+        }
+      });
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    });
+</script>
+
+
+
+
+
+{% block body %}
+{% endblock %}
+
+
+
+
+             
           </div>
         </div>
         <!-- content-wrapper ends -->
@@ -379,8 +444,10 @@
   <script src="{{ asset('backOffice/assets/js/template.js')}}"></script>
   <script src="{{ asset('backOffice/assets/js/settings.js')}}"></script>
   <script src="{{ asset('backOffice/assets/js/todolist.js')}}"></script>
+  
   <!-- endinject -->
   <!-- Custom js for this page-->
+   <script src="{{ asset('backOffice/assets/js/chart.js')}}"></script>
   <!-- End custom js for this page-->
 </body>
 

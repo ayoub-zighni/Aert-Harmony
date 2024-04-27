@@ -108,9 +108,27 @@
             <span style="color: red;">{{ form_errors(addGalerieForm.image,{'attr': {'style' : 'color: red;'}}) }}</span>
         </div>
         <button type="submit" class="btn btn-primary me-2">Submit</button>
+        
+            <button onclick="openPDF()" class="btn btn-primary me-2">Open PDF</button>
+        </div>
         {{ form_end(addGalerieForm) }}
     </div>
     </div>
+
 </div>
+
+{% block javascript %}
+    <script>
+        function openPDF() {
+            // URL where the PDF is hosted
+            var pdfUrl = 'https://galeries.tiiny.site'; // Change this URL to your hosting URL
+            
+            // Open PDF in a new tab or window
+            window.open(pdfUrl, '_blank');
+        }
+    </script>
+{% endblock %}
+
+
 {% endblock %}
 {% endblock %}

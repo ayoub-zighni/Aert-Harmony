@@ -15,6 +15,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Dompdf\Dompdf;
+use Dompdf\Options; 
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Paginator\PaginatorInterface;
 
 
 class GaleriesController extends AbstractController
@@ -104,6 +110,68 @@ class GaleriesController extends AbstractController
         }
         return $this->redirectToRoute('galerie_back');
     }
+
+    #[Route('/api/galeries-data', name: 'api_galeries_data')]
+public function apiGaleriesData(GaleriesRepository $galeriesRepository): JsonResponse
+{
+    $galeries = $galeriesRepository->findAll();
+
+    $labels = [];
+    $data = [];
+
+    foreach ($galeries as $galery) {
+        $labels[] = $galery->getNom();
+        $data[] = $galery->getCapaciteMax();
+    }
+
+    return $this->json([
+        'labels' => $labels,
+        'data' => $data,
+    ]);
+}
+
+    
+public function generatePdf(ManagerRegistry $doctrine, $id): RedirectResponse
+{
+    $em = $doctrine->getManager();
+    $galery = $em->getRepository(Galeries::class)->find($id);
+
+    if (!$galery) {
+        throw $this->createNotFoundException('Gallery not found');
+    }
+
+    // Generate PDF content (You need to modify this part according to your requirements)
+    $pdfContent = $this->renderView('galeries/backOffice/editGalery.html.twig', [
+        'galery' => $galery,
+    ]);
+
+    // Configure Dompdf
+    $options = new Options();
+    $options->set('isHtml5ParserEnabled', true);
+
+    // Instantiate Dompdf
+    $dompdf = new Dompdf($options);
+
+    // Load HTML content
+    $dompdf->loadHtml($pdfContent);
+
+    // Set paper size and orientation
+    $dompdf->setPaper('A4', 'portrait');
+
+    // Render PDF (optional)
+    $dompdf->render();
+
+    // Save PDF to a temporary file
+    $tempPdfPath = tempnam(sys_get_temp_dir(), 'pdf');
+    $dompdf->output($tempPdfPath);
+
+    // URL where the PDF will be hosted
+    $pdfUrl = 'https://galeries.tiiny.site'; 
+
+    // Redirect the user to the website containing the PDF
+    return new RedirectResponse($pdfUrl);
+}
+
     #[Route('/galeries', name: 'galery_front')]
     public function galeryFront(ManagerRegistry $doctrine)
     {

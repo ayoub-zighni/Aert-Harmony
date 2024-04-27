@@ -6,6 +6,7 @@ use App\Entity\Galeries;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+
 /**
  * @extends ServiceEntityRepository<Galeries>
  *
@@ -21,6 +22,18 @@ class GaleriesRepository extends ServiceEntityRepository
         parent::__construct($registry, Galeries::class);
     }
 
+
+
+
+    public function search($term)
+    {
+        return $this->createQueryBuilder('g')
+            ->andWhere('g.nom LIKE :term')
+            ->setParameter('term', '%' . $term . '%')
+            ->getQuery()
+            ->getResult();
+    }
+}
 //    /**
 //     * @return Galeries[] Returns an array of Galeries objects
 //     */
@@ -45,4 +58,4 @@ class GaleriesRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
-}
+
