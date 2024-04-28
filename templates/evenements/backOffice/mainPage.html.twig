@@ -1,0 +1,166 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block body %}
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Events List</h4>
+            <!-- Search input -->
+            <input type="text" id="searchInput" class="form-control" placeholder="Search...">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>#ID</th>
+                            <th>Name</th>
+                            <th>Date</th>
+                            <th>Hour</th>
+                            <th>Description</th>
+                            <th>Galery</th>
+                            <th>Actions</th>                
+                        </tr>
+                    </thead>
+                    <tbody id="eventList">
+                        {% for event in events %}
+                        <tr>
+                            <td class="py-1">
+                                <img src="{{ asset('contents/uploads/events/' ~ event.image) }}" alt="image" />
+                            </td>
+                            <td>{{ event.id }}</td>
+                            <td>{{ event.nom }}</td>
+                            <td>{{ event.date|date('Y-m-d') }}</td>
+                            <td>{{ event.heure|date('H:i:s') }}</td>
+                            <td>{{ event.description }}</td>
+                            <td>{{ event.galerieid }}</td>
+                            <td>
+                                <a class="btn btn-primary me-2" href="{{ path('edit_event', {'idGalery' : event.galerieid, 'idEvent' : event.id }) }}">Edit</a>
+                                <a class="btn btn-primary me-2" href="{{ path('delete_event', {'idGalery' : event.galerieid, 'idEvent' : event.id }) }}">Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    // Function to filter events based on user input
+    function filterEvents() {
+        // Get input element and filter value
+        var input = document.getElementById('searchInput');
+        var filter = input.value.toUpperCase();
+
+        // Get events list
+        var tbody = document.getElementById('eventList');
+        var tr = tbody.getElementsByTagName('tr');
+
+        // Loop through all event items, and hide those that don't match the search query
+        for (var i = 0; i < tr.length; i++) {
+            var td1 = tr[i].getElementsByTagName('td')[1]; // ID column
+            var td2 = tr[i].getElementsByTagName('td')[2]; // Name column
+            var td3 = tr[i].getElementsByTagName('td')[3]; // Date column
+            var td4 = tr[i].getElementsByTagName('td')[4]; // Hour column
+            var td5 = tr[i].getElementsByTagName('td')[5]; // Description column
+            var td6 = tr[i].getElementsByTagName('td')[6]; // Galery column
+            if (td1 && td2 && td3 && td4 && td5 && td6) {
+                var textValue1 = td1.textContent || td1.innerText;
+                var textValue2 = td2.textContent || td2.innerText;
+                var textValue3 = td3.textContent || td3.innerText;
+                var textValue4 = td4.textContent || td4.innerText;
+                var textValue5 = td5.textContent || td5.innerText;
+                var textValue6 = td6.textContent || td6.innerText;
+                if (textValue1.toUpperCase().indexOf(filter) > -1 ||
+                    textValue2.toUpperCase().indexOf(filter) > -1 ||
+                    textValue3.toUpperCase().indexOf(filter) > -1 ||
+                    textValue4.toUpperCase().indexOf(filter) > -1 ||
+                    textValue5.toUpperCase().indexOf(filter) > -1 ||
+                    textValue6.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = '';
+                } else {
+                    tr[i].style.display = 'none';
+                }
+            }
+        }
+    }
+
+    // Add event listener to the search input
+    document.getElementById('searchInput').addEventListener('input', filterEvents);
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendar</title>
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.0/main.min.css' rel='stylesheet' />
+</head>
+<body>
+  <div id='calendar'></div>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.0/main.min.js'></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var calendarEl = document.getElementById('calendar');
+
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth', // Vous pouvez choisir la vue initiale du calendrier (mois, semaine, jour, etc.)
+        events: [
+          // Insérez ici vos événements récupérés depuis votre base de données
+          // Exemple: { title: 'Nom de l'événement', start: '2024-04-01' }
+          // Assurez-vous de formater correctement les données selon les spécifications de FullCalendar
+        ]
+      });
+
+      calendar.render();
+    });
+  </script>
+</body>
+</html>
+
+
+{% block form %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title text-center">Add Event</h4> {# Center the title #}
+                    <form method="POST" novalidate="novalidate" class="forms-sample">
+                        <div class="form-group">
+                            <label for="exampleInputUsername1">Name</label>
+                            {{ form_widget(addEventForm.nom, {'attr': {'placeholder': 'Add a Name', 'class': 'form-control'}}) }}
+                            <span style="color: red;">{{ form_errors(addEventForm.nom,{'attr': {'style' : 'color: red;'}}) }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Date</label>
+                            {{ form_widget(addEventForm.date, {'attr': {'placeholder': 'Add Address', 'class': 'form-control'}}) }}
+                            <span style="color: red;">{{ form_errors(addEventForm.date,{'attr': {'style' : 'color: red;'}}) }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Hour</label>
+                            {{ form_widget(addEventForm.heure, {'attr': {'placeholder': 'Add a country', 'class': 'form-control'}}) }}
+                            <span style="color: red;">{{ form_errors(addEventForm.heure,{'attr': {'style' : 'color: red;'}}) }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Description</label>
+                            {{ form_widget(addEventForm.description, {'attr': {'placeholder': 'Description', 'class': 'form-control'}}) }}
+                            <span style="color: red;">{{ form_errors(addEventForm.description,{'attr': {'style' : 'color: red;'}}) }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Image</label>
+                            {{ form_widget(addEventForm.image, {'attr': {'placeholder': 'Capacity', 'class': 'form-control'}}) }}
+                            <span style="color: red;">{{ form_errors(addEventForm.image,{'attr': {'style' : 'color: red;'}}) }}</span>
+                        </div>
+                        <button type="submit" class="btn btn-primary me-2">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% endblock %}
