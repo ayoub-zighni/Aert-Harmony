@@ -1,0 +1,99 @@
+{% extends 'baseFront.html.twig' %}
+{% block body %}
+ <!-- start banner Area -->
+<section class="banner-area relative" id="home">	
+    <div class="overlay overlay-bg"></div>
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="about-content col-lg-12">
+                <h1 class="text-white">
+                    Art Gallery				
+                </h1>	
+                <p class="text-white link-nav"><a href="#">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="{{path('galery_front')}}"> Gallery</a></p>
+            </div>											
+        </div>
+    </div>
+</section>
+<!-- End banner Area -->	
+	
+
+  
+<!-- Start blog Area -->
+<section class="blog-area section-gap" id="blog">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="menu-content pb-70 col-lg-8">
+                <div class="title text-center">
+                    <h1 class="mb-10">Our Events</h1>
+                </div>
+            </div>
+        </div>					
+        <div class="row">
+        {% for event in events %}
+            <div class="col-lg-3 col-md-6 single-blog">
+                <div class="thumb">
+                    <img class="img-fluid" src="{{ asset('contents/uploads/events/' ~ event.image) }}" alt="">								
+                </div>       
+                <p class="date">{{ event.date|date('Y-m-d') }}</p>
+                <a href="{{path('galery_front')}}"><h4>{{ event.nom }}</h4></a>
+                <p>
+                    {{ event.description }}
+                </p>
+                <div class="meta-bottom d-flex justify-content-between">
+                    <p>Time: {{ event.heure|date('H:i:s') }}</p>
+                </div>									
+            </div>
+ 
+ <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+<div class="elfsight-app-92b524ae-4a25-4b36-8f0d-daf6f990b2b5" data-elfsight-app-lazy></div>
+
+            {% endfor %}			
+        </div>
+    </div>	
+</section>
+<!-- End blog Area -->
+
+  <button onclick="openGoogleMaps()">Open Google Maps</button>
+
+
+    {{ parent() }}
+    <style>
+        button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition-duration: 0.4s;
+        }
+
+        button:hover {
+            background-color: #45a049; /* Darker Green */
+        }
+    </style>
+
+
+
+    {{ parent() }}
+    <script>
+        function openGoogleMaps() {
+            // Define the latitude and longitude for the location you want to show on Google Maps
+            var latitude = 37.7749; // Example: Latitude for San Francisco
+            var longitude = -122.4194; // Example: Longitude for San Francisco
+
+            // Construct the Google Maps URL with the latitude and longitude parameters
+            var googleMapsUrl = 'https://www.google.com/maps?q=' + latitude + ',' + longitude;
+
+            // Open Google Maps in a new tab
+            window.open(googleMapsUrl, '_blank');
+        }
+    </script>
+
+
+{% endblock %}
