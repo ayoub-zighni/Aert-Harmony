@@ -1,0 +1,412 @@
+{% extends 'baseBack.html.twig' %}
+{% block body %}
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Events List</h4>
+        <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>
+                Image
+                </th>
+                <th>
+                #ID
+                </th>
+                <th>
+                Name
+                </th>
+                <th>
+                Date
+                </th>
+                <th>
+                Hour
+                </th>
+                <th>
+                Description
+                </th>
+                <th>
+                Galery
+                </th>
+                <th>
+                Actions
+                </th>                
+            </tr>
+            </thead>
+            <tbody>
+            {% for event in events %}
+            <tr>
+                <td class="py-1">
+                <img src="{{ asset('contents/uploads/events/' ~ event.image) }}" alt="image" />
+                </td>
+                <td>
+                {{ event.id }}
+                </td>
+                <td>
+                {{ event.nom }}
+                </td>
+                <td>{{ event.date|date('Y-m-d') }}</td>
+                <td>{{ event.heure|date('H:i:s') }}</td>
+                <td>
+               {{ event.description }}
+                </td>
+                <td>
+               {{ event.galerieid }}
+                </td>
+                <td>
+                    <a class="btn btn-primary me-2" href="{{ path('edit_event', {'idGalery' : event.galerieid, 'idEvent' : event.id })}}">Edit</a>
+                    <a class="btn btn-primary me-2" href="{{ path('delete_event', {'idGalery' : event.galerieid, 'idEvent' : event.id })}}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    </div>
+    </div>
+</div>
+
+
+
+
+{% block form %}
+<div class="col-md-6 grid-margin stretch-card">
+    <div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Add Event</h4>
+        {{form_start(addEventForm,{'attr':{'methode':'POST','novalidate': 'novalidate','class' : 'forms-sample'}})}}
+        <div class="form-group">
+            <label for="exampleInputUsername1">Name</label>
+            {{ form_widget(addEventForm.nom, {'attr': {'placeholder': 'Add a Name', 'class': 'form-control'}}) }}
+            <span style="color: red;">{{ form_errors(addEventForm.nom,{'attr': {'style' : 'color: red;'}}) }}</span>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Date</label>
+            {{ form_widget(addEventForm.date, {'attr': {'placeholder': 'Add Address', 'class': 'form-control'}}) }}
+            <span style="color: red;">{{ form_errors(addEventForm.date,{'attr': {'style' : 'color: red;'}}) }}</span>
+        </div>
+        <div class="form-group">
+           <label for="exampleInputEmail1">Hour</label>
+            {{ form_widget(addEventForm.heure, {'attr': {'placeholder': 'Add a country', 'class': 'form-control'}}) }}
+            <span style="color: red;">{{ form_errors(addEventForm.heure,{'attr': {'style' : 'color: red;'}}) }}</span>
+        </div>
+        <div class="form-group">
+           <label for="exampleInputEmail1">Descripion</label>
+            {{ form_widget(addEventForm.description, {'attr': {'placeholder': 'Description', 'class': 'form-control'}}) }}
+            <span style="color: red;">{{ form_errors(addEventForm.description,{'attr': {'style' : 'color: red;'}}) }}</span>
+        </div>
+        <div class="form-group">
+           <label for="exampleInputEmail1">Image</label>
+            {{ form_widget(addEventForm.image, {'attr': {'placeholder': 'Capacity', 'class': 'form-control'}}) }}
+            <span style="color: red;">{{ form_errors(addEventForm.image,{'attr': {'style' : 'color: red;'}}) }}</span>
+        </div>
+        <button type="submit" class="btn btn-primary me-2">Submit</button>
+        {{ form_end(addEventForm) }}
+    </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendrier Moderne</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <style>
+    @import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
+    :root {
+      --primary-color: #f90a39;
+      --text-color: #1d1d1d;
+      --bg-color: #f1f1fb;
+      --event-color: green; /* Couleur des événements */
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+    body {
+      background: #ffffff;
+    }
+    .container {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .calendar {
+      width: 100%;
+      max-width: 600px;
+      background: var(--bg-color);
+      padding: 30px 20px;
+      border-radius: 10px;
+      position: relative; /* Ajout de position relative */
+    }
+    .calendar .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #ccc;
+    }
+    .calendar .header .month {
+      display: flex;
+      align-items: center;
+      font-size: 25px;
+      font-weight: 600;
+      color: var(--text-color);
+    }
+    .calendar .header .btns {
+      display: flex;
+      gap: 10px;
+    }
+    .calendar .header .btns .btn {
+      width: 50px;
+      height: 40px;
+      background: var(--primary-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 5px;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .calendar .header .btns .btn:hover {
+      background: #db0933;
+      transform: scale(1.05);
+    }
+    .calendar .weekdays {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .calendar .weekdays .day {
+      width: calc(100% / 7 - 10px);
+      text-align: center;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .calendar .days {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .calendar .days .day {
+      width: calc(100% / 7 - 10px);
+      height: 50px;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--text-color);
+      transition: all 0.3s;
+      user-select: none;
+      position: relative;
+    }
+    .calendar .days .day:not(.next):not(.prev):hover {
+      color: #fff;
+      background: var(--primary-color);
+      transform: scale(1.05);
+    }
+    .calendar .days .day.next,
+    .calendar .days .day.prev {
+      color: #ccc;
+    }
+    .calendar .days .day.today {
+      color: var(--text-color);
+      background: #ff5252; /* Rouge */
+    }
+    .calendar .days .day.event-day {
+      background-color: var(--event-color);
+      color: white;
+    }
+    .credits a {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 14px;
+      color: #aaa;
+    }
+    .credits span {
+      color: var(--primary-color);
+    }
+    .event-tooltip {
+      position: absolute;
+      top: calc(100% + 5px); /* Place le tooltip sous le jour */
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 5px;
+      display: none;
+      z-index: 9999;
+    }
+    .day .event-tooltip {
+      top: calc(-100% - 5px); /* Place le tooltip au-dessus du jour */
+    }
+    .day:hover .event-tooltip {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="calendar">
+      <div class="header">
+        <div class="month">Juillet 2024</div>
+        <div class="btns">
+          <div class="btn today" style="display: none;">
+            <i class="fas fa-calendar-day"></i>
+          </div>
+          <div class="btn prev">
+            <i class="fas fa-chevron-left"></i>
+          </div>
+          <div class="btn next">
+            <i class="fas fa-chevron-right"></i>
+          </div>
+        </div>
+      </div>
+      <div class="weekdays">
+        <div class="day">Dim</div>
+        <div class="day">Lun</div>
+        <div class="day">Mar</div>
+        <div class="day">Mer</div>
+        <div class="day">Jeu</div>
+        <div class="day">Ven</div>
+        <div class="day">Sam</div>
+      </div>
+      <div class="days">
+        <!-- render days with js -->
+      </div>
+    </div>
+  </div>
+  <div class="credits">
+    </a>
+  </div>
+  <script>
+    const daysContainer = document.querySelector(".days");
+    const nextBtn = document.querySelector(".next");
+    const prevBtn = document.querySelector(".prev");
+    const todayBtn = document.querySelector(".today");
+    const month = document.querySelector(".month");
+
+    const months = [
+      "Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
+      "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
+    ];
+
+    const days = ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"];
+
+    const date = new Date();
+    let currentMonth = date.getMonth();
+    let currentYear = date.getFullYear();
+
+    const renderCalendar = () => {
+      date.setDate(1);
+      const firstDay = new Date(currentYear, currentMonth, 1);
+      const lastDay = new Date(currentYear, currentMonth + 1, 0);
+      const lastDayIndex = lastDay.getDay();
+      const lastDayDate = lastDay.getDate();
+      const prevLastDay = new Date(currentYear, currentMonth, 0);
+      const prevLastDayDate = prevLastDay.getDate();
+      const nextDays = 7 - lastDayIndex - 1;
+
+      month.innerHTML = `${months[currentMonth]} ${currentYear}`;
+
+      let days = "";
+
+      for (let x = firstDay.getDay(); x > 0; x--) {
+        days += `<div class="day prev">${prevLastDayDate - x + 1}</div>`;
+      }
+
+      for (let i = 1; i <= lastDayDate; i++) {
+        if (
+          (i === 1 && currentMonth === 6 && currentYear === 2024) || // Le 1er juillet 2024
+          (i === new Date().getDate() && currentMonth === new Date().getMonth() && currentYear === new Date().getFullYear()) // Aujourd'hui
+        ) {
+          days += `<div class="day${(i === 1 && currentMonth === 6 && currentYear === 2024) ? ' event-day' : ''}${(i === new Date().getDate() && currentMonth === new Date().getMonth() && currentYear === new Date().getFullYear()) ? ' today' : ''}" data-tooltip="Événement Aujourd'hui">${i}<div class="event-tooltip">Événement Aujourd'hui</div></div>`;
+        } else if (
+          (i === 13 && currentMonth === 5 && currentYear === 2024) || // Le 13 juin 2024
+          (i === 16 && currentMonth === 7 && currentYear === 2024) || // Le 16 août 2024
+          (i === 5 && currentMonth === 8 && currentYear === 2024) // Le 5 septembre 2024
+        ) {
+          days += `<div class="day event-day" data-tooltip="Événement Aujourd'hui">${i}<div class="event-tooltip">Événement Aujourd'hui</div></div>`;
+        } else {
+          days += `<div class="day">${i}</div>`;
+        }
+      }
+
+      for (let j = 1; j <= nextDays; j++) {
+        days += `<div class="day next">${j}</div>`;
+      }
+
+      daysContainer.innerHTML = days;
+      hideTodayBtn();
+    };
+
+    nextBtn.addEventListener("click", () => {
+      currentMonth++;
+      if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+      }
+      renderCalendar();
+    });
+
+    prevBtn.addEventListener("click", () => {
+      currentMonth--;
+      if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+      }
+      renderCalendar();
+    });
+
+    todayBtn.addEventListener("click", () => {
+      currentMonth = date.getMonth();
+      currentYear = date.getFullYear();
+      renderCalendar();
+    });
+
+    function hideTodayBtn() {
+      if (
+        currentMonth === new Date().getMonth() &&
+        currentYear === new Date().getFullYear()
+      ) {
+        todayBtn.style.display = "none";
+      } else {
+        todayBtn.style.display = "flex";
+      }
+    }
+
+    renderCalendar();
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+{% endblock %}
+
+
+
