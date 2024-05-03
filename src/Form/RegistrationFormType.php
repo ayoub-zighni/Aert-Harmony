@@ -5,43 +5,30 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Regex;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom', TextType::class, [
-                'constraints' => [
-                    new NotBlank(),
-                    new Regex([
-                        'pattern' => '/^[^\d]+$/',
-                        'message' => 'Le nom ne doit pas contenir de chiffres.',
-                    ]),
-                ],
-            ])
-            ->add('prenom', TextType::class, [
-                'constraints' => [
-                    new NotBlank(),
-                    new Regex([
-                        'pattern' => '/^[^\d]+$/',
-                        'message' => 'Le prénom ne doit pas contenir de chiffres.',
-                    ]),
-                ],
-            ])
-            ->add('username', TextType::class)
             ->add('email')
+            ->add('agreeTerms', CheckboxType::class, [
+                'mapped' => false,
+                'constraints' => [
+                    new IsTrue([
+                        'message' => 'You should agree to our terms.',
+                    ]),
+                ],
+            ])
             ->add('plainPassword', PasswordType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
@@ -51,34 +38,48 @@ class RegistrationFormType extends AbstractType
                     new Length([
                         'min' => 6,
                         'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
                 ],
             ])
-            ->add('birthdate', null, [
-                'widget' => 'single_text'
-            ])
-            ->add('phone', TextType::class, [
-                'required' => false, // Make phone field optional
+            ->add('nom', TextType::class, [
                 'constraints' => [
-                    new Regex([
-                        'pattern' => '/^\d{8}$/',
-                        'message' => 'Le numéro de téléphone doit contenir exactement 8 chiffres.',
+                    new NotBlank([
+                        'message' => 'Please enter your last name',
                     ]),
                 ],
             ])
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
+            ->add('prenom', TextType::class, [
                 'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                    new NotBlank([
+                        'message' => 'Please enter your first name',
+                    ]),
+                ],
+            ])
+            ->add('username', TextType::class, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter a username',
+                    ]),
+                ],
+            ])
+            ->add('birthdate', DateType::class, [
+                'widget' => 'single_text',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter your birthdate',
+                    ]),
+                ],
+            ])
+            ->add('phone', TextType::class, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter your phone number',
                     ]),
                 ],
             ])
         ;
     }
-
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

@@ -1,59 +1,23 @@
-{% extends '/home/front.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card mt-5">
-                    <div class="card-body">
-                        <h1 class="h3 mb-3 font-weight-normal text-center">Register</h1>
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
 
-                        {% if form_errors(registrationForm) %}
-                            <div class="alert alert-danger">{{ form_errors(registrationForm)|join(', ') }}</div>
-                        {% endif %}
+    <h1>Register</h1>
 
-                        <form method="post" class="form-signup">
-                            {{ form_start(registrationForm) }}
-                            <div class="form-group">
-                                {{ form_label(registrationForm.nom, 'Nom') }}
-                                {{ form_widget(registrationForm.nom, {'attr': {'class': 'form-control'}}) }}
-                            </div>
-                            <div class="form-group">
-                                {{ form_label(registrationForm.prenom, 'Prénom') }}
-                                {{ form_widget(registrationForm.prenom, {'attr': {'class': 'form-control'}}) }}
-                            </div>
-                            <div class="form-group">
-                                {{ form_label(registrationForm.username, 'Username') }}
-                                {{ form_widget(registrationForm.username, {'attr': {'class': 'form-control'}}) }}
-                            </div>
-                            <div class="form-group">
-                                {{ form_label(registrationForm.email, 'Email') }}
-                                {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
-                            </div>
-                            <div class="form-group">
-                                {{ form_label(registrationForm.plainPassword, 'Password') }}
-                                {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control'}}) }}
-                            </div>
-                            <div class="form-group">
-                                {{ form_label(registrationForm.birthdate, 'Birthdate') }}
-                                {{ form_widget(registrationForm.birthdate, {'attr': {'class': 'form-control'}}) }}
-                            </div>
-                            <div class="form-group">
-                                {{ form_label(registrationForm.phone, 'Phone') }}
-                                {{ form_widget(registrationForm.phone, {'attr': {'class': 'form-control'}}) }}
-                            </div>
-                            <div class="form-group form-check">
-                                {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
-                                {{ form_label(registrationForm.agreeTerms, 'I agree to the terms', {'label_attr': {'class': 'form-check-label'}}) }}
-                            </div>
-                            <button type="submit" class="btn btn-lg btn-primary btn-block">Register</button>
-                            {{ form_end(registrationForm) }}
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    {{ form_errors(registrationForm) }}
+
+    {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.plainPassword, {
+            label: 'Password'
+        }) }}
+        {{ form_row(registrationForm.agreeTerms) }}
+
+    <button type="submit" class="btn">Register</button>
+    {{ form_end(registrationForm) }}
 {% endblock %}
