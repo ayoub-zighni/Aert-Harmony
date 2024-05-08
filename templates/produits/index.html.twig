@@ -1,0 +1,157 @@
+{% extends 'dashboard.html.twig' %} 
+
+{% block title %}Produits index{% endblock %}
+   {% block nav %}
+    <li class="nav-item active">
+      <a class="nav-link" href="{{ path('admin_produits_index')}}">
+        <i class="mdi mdi-grid-large menu-icon"></i>
+        <span class="menu-title">Produits</span>
+      </a>
+    </li>
+    
+    <li class="nav-item ">
+      <a class="nav-link" href="{{ path('app_categorie_index')}}">
+        <i class="mdi mdi-grid-large menu-icon"></i>
+        <span class="menu-title">Categories</span>
+      </a>
+    </li>
+    {% endblock %}
+
+
+{% block body %}
+    <div class="container">
+        <h1>Produits index</h1>
+         <div class="d-flex">
+            <button id="btPrint" onclick="createPDF()" class="export-pdf-btn">
+                <i class="fas fa-file-pdf"></i> Export PDF
+            </button>
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search ..." class="form-control"
+                id="search-input">
+        </div>
+        <a href="{{ path('app_produits_new') }}" class="btn btn-success w-100 mb-4 mt-4">Create new</a>
+
+        <table class="table table-striped" id="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th onclick="sortTable(1)">Nom</th>
+                    <th>Description</th>
+                    <th>Image</th>
+                    <th>Prix</th>
+                    <th>Stock</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for produit in pagination %}
+                <tr>
+                    <td>{{ produit.id }}</td>
+                    <td>{{ produit.nom }}</td>
+                    <td>{{ produit.description }}</td>
+                <td><img class="img-fluid" style="width:50px;height:50px" src="{{ asset('uploads/'~produit.image)}}" alt=""></td>
+                    <td>{{ produit.prix }}</td>
+                    <td>{{ produit.stock }}</td>
+                    <td>
+                        <a href="{{ path('admin_produits_show', {'id': produit.id}) }}" class="btn btn-info btn-sm">Show</a>
+                        <a href="{{ path('app_produits_edit', {'id': produit.id}) }}" class="btn btn-primary btn-sm">Edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">No records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+      <div class="pagination">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script>
+      function createPDF() {
+        var sTable = document.getElementById('table').outerHTML;
+        var style = "<style>";
+        style = style + "table {width: 100%; border-collapse: collapse; margin-top: 20px;}";
+        style = style + "th, td {border: 1px solid #ddd; padding: 8px; text-align: left;}";
+        style = style + "th {background-color: #f2f2f2;}";
+        style = style + "</style>";
+    
+        // CREATE A WINDOW OBJECT.
+        var win = window.open('', '', 'height=700,width=700');
+        win.document.write('<html><head>');
+        win.document.write('<title>product list PDF</title>');   // <title> FOR PDF HEADER.
+        win.document.write(style);          // ADD STYLE INSIDE THE HEAD TAG.
+        win.document.write('</head>');
+        win.document.write('<body>');
+        win.document.write(sTable);         // THE TABLE CONTENTS INSIDE THE BODY TAG.
+        win.document.write('</body></html>');
+        win.document.close(); 	// CLOSE THE CURRENT WINDOW.
+        win.print();    // PRINT THE CONTENTS.
+    }
+    </script>
+    <script>
+        function myFunction() {
+          // Declare variables
+          var input, filter, table, tr, td, i, txtValue;
+          input = document.getElementById("myInput");
+          filter = input.value.toUpperCase();
+          table = document.getElementById("table");
+          tr = table.getElementsByTagName("tr");
+        
+          // Loop through all table rows, and hide those who don't match the search query
+          for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+              txtValue = td.textContent || td.innerText;
+              if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+              } else {
+                tr[i].style.display = "none";
+              }
+            }
+          }
+        }
+
+        function sortTable(n) {
+          var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+          table = document.getElementById("table");
+          switching = true;
+          dir = "asc";
+
+          while (switching) {
+            switching = false;
+            rows = table.rows;
+
+            for (i = 1; i < (rows.length - 1); i++) {
+              shouldSwitch = false;
+              x = rows[i].getElementsByTagName("TD")[n];
+              y = rows[i + 1].getElementsByTagName("TD")[n];
+
+              if (dir == "asc") {
+                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                  shouldSwitch = true;
+                  break;
+                }
+              } else if (dir == "desc") {
+                if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                  shouldSwitch = true;
+                  break;
+                }
+              }
+            }
+
+            if (shouldSwitch) {
+              rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+              switching = true;
+              switchcount++;
+            } else {
+              if (switchcount == 0 && dir == "asc") {
+                dir = "desc";
+                switching = true;
+              }
+            }
+          }
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% for livreur in livreur %}
+
+    <tr>
+        <td>{{ livreur.nom }}</td>
+        <td>{{ livreur.prenom }}</td>
+        <td>{{ livreur.region}}</td>
+        <td>{{ livreur.email }}</td>
+        
+        <td>{{ livreur.telephone }}</td>
+       
+        <td>
+            <a href="{{ path('read', {'id': livreur.id}) }}">Afficher</a> 
+              <a href="{{ path('edit', {'id': livreur.id }) }}">Modifier</a>
+        </td>
+    </tr>
+{% else %}
+    <tr>
+        <td colspan="7">No records found</td>
+    </tr>
+{% endfor %}

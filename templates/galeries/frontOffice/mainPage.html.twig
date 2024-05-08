@@ -1,0 +1,72 @@
+{% extends 'baseFront.html.twig' %}
+{% block body %}
+ <!-- start banner Area -->
+<section class="banner-area relative" id="home">	
+    <div class="overlay overlay-bg"></div>
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="about-content col-lg-12">
+                <h1 class="text-white">
+                    Art Gallery				
+                </h1>	
+                <p class="text-white link-nav"><a href="#">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="{{path('galery_front')}}"> Gallery</a></p>
+            </div>											
+        </div>
+    </div>
+</section>
+<!-- End banner Area -->	
+		
+<!-- Start blog Area -->
+<section class="blog-area section-gap" id="blog">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="menu-content pb-70 col-lg-8">
+                <div class="title text-center">
+                    <h1 class="mb-10">Our Galeries</h1>
+                </div>
+            </div>
+        </div>					
+        {% set itemsPerPage = 3 %}
+        {% set currentPage = app.request.query.get('page', 1) %}
+        {% set start = (currentPage - 1) * itemsPerPage %}
+        {% set end = start + itemsPerPage %}
+        {% set totalPages = galeries|length // itemsPerPage + (galeries|length % itemsPerPage > 0 ? 1 : 0) %}
+
+        <div class="row">
+            {% for galery in galeries|slice(start, end) %}
+                <div class="col-lg-4 col-md-6 mb-5">
+                    <div class="single-blog">
+                        <div class="thumb">
+                            <img class="img-fluid" src="{{ asset('contents/uploads/galeries/' ~ galery.image) }}" alt="">								
+                        </div>
+                        <p class="date">{{ galery.capaciteMax }} Max Capacity</p>
+                        <a href="{{ path('event_front',{'idGalery' : galery.id}) }}"><h4>{{ galery.nom }}</h4></a>
+                        <p>{{ galery.adresse }}</p>
+                        <div class="meta-bottom d-flex justify-content-between">
+                            <p>City: {{ galery.ville }}</p>
+                            <p>Country: {{ galery.pays }}</p>
+                        </div>									
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="row justify-content-center">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    {% for page in 1..totalPages %}
+                        <li class="page-item {% if page == currentPage %}active{% endif %}">
+                            <a class="page-link text-black {% if page == currentPage %}bg-dark border-dark{% endif %}" href="?page={{ page }}">{{ page }}</a> <!-- Ajoutez les classes "text-black" et "bg-dark border-dark" pour changer la couleur du texte en noir et le fond en noir pour la page active -->
+                        </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
+    </div>	
+</section>
+<!-- End blog Area -->
+
+
+
+
+{% endblock %}

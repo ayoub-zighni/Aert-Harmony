@@ -1,0 +1,48 @@
+{% extends 'dashboard.html.twig' %}
+
+{% block title %}Categorie index{% endblock %}
+    {% block nav %}
+    <li class="nav-item">
+      <a class="nav-link" href="{{ path('admin_produits_index')}}">
+        <i class="mdi mdi-grid-large menu-icon"></i>
+        <span class="menu-title">Produits</span>
+      </a>
+    </li>
+    <li class="nav-item active">
+      <a class="nav-link" href="{{ path('app_categorie_index')}}">
+        <i class="mdi mdi-grid-large menu-icon"></i>
+        <span class="menu-title">Categories</span>
+      </a>
+    </li>
+    {% endblock %}
+{% block body %}
+    <h1>Categorie index</h1>
+        <a href="{{ path('app_categorie_new') }}" class="btn btn-success w-100 mb-4 mt-4">Create new</a>
+
+        <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categorie in categories %}
+            <tr>
+                <td>{{ categorie.id }}</td>
+                <td>{{ categorie.nom }}</td>
+                <td>
+                    <a href="{{ path('app_categorie_show', {'id': categorie.id}) }}" class="btn btn-info btn-sm">show</a>
+                    <a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}" class="btn btn-primary btn-sm">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
