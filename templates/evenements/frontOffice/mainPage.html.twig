@@ -1,0 +1,88 @@
+{% extends 'baseFront.html.twig' %}
+{% block body %}
+ <!-- start banner Area -->
+<section class="banner-area relative" id="home">	
+    <div class="overlay overlay-bg"></div>
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="about-content col-lg-12">
+                <h1 class="text-white">
+                    Art Gallery				
+                </h1>	
+                <p class="text-white link-nav"><a href="#">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="{{path('galery_front')}}"> Gallery</a></p>
+            </div>											
+        </div>
+    </div>
+</section>
+<!-- End banner Area -->	
+	
+
+  
+<!-- Start blog Area -->
+<section class="blog-area section-gap" id="blog">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="menu-content pb-70 col-lg-8">
+                <div class="title text-center">
+                    <h1 class="mb-10">Our Events</h1>
+                </div>
+            </div>
+        </div>					
+        <div class="row">
+        {% for event in events %}
+            <div class="col-lg-3 col-md-6 single-blog">
+                <div class="thumb">
+                    <img class="img-fluid" src="{{ asset('contents/uploads/events/' ~ event.image) }}" alt="">								
+                </div>       
+                <p class="date">{{ event.date|date('Y-m-d') }}</p>
+                <a href="{{path('galery_front')}}"><h4>{{ event.nom }}</h4></a>
+                <p>
+                    {{ event.description }}
+                </p>
+                <div class="meta-bottom d-flex justify-content-between">
+                    <p>Time: {{ event.heure|date('H:i:s') }}</p>
+                </div>									
+            </div>
+ 
+ <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+<div class="elfsight-app-eca98a1f-f0f7-4c39-8a74-ccbaac686879" data-elfsight-app-lazy></div>
+
+            {% endfor %}			
+        </div>
+    </div>	
+</section>
+<!-- End blog Area -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Google Maps</title>
+</head>
+<body>
+    <h1>Contact</h1>
+    
+    <p>
+        <strong>Address:</strong>
+        <br> Ariana , Tunis
+        
+    </p>
+    
+    <p>
+        <strong>Phone:</strong>
+        <br>+21696740740
+    </p>
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3190.6260999576434!2d10.186787111025616!3d36.8992920619922!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12e2cb7454c6ed51%3A0x683b3ab5565cd357!2sEsprit%20pr%C3%A9pa!5e0!3m2!1sfr!2stn!4v1714735594996!5m2!1sfr!2stn" width="1475" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</body>
+</html>
+
+
+
+
+ 
+
+
+{% endblock %}

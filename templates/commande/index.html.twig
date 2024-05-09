@@ -1,0 +1,39 @@
+{% extends 'front/front.html.twig' %}
+
+{% block title %}Commande list{% endblock %}
+
+{% block body %}
+    <h1>Liste des commandes</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdC</th>
+                <th>AdresseLivraison</th>
+                <th>NumTel</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for commande in commande %}
+            <tr>
+                <td>{{ commande.idC }}</td>
+                <td>{{ commande.adresseLivraison }}</td>
+                <td>{{ commande.numTel }}</td>
+                <td>
+                    <a href="{{ path('app_commande_show', {'idC': commande.idC}) }}">show</a>
+                    <a href="{{ path('app_commande_edit', {'idC': commande.idC}) }}">edit</a>
+                        {{ include('commande/_delete_form.html.twig') }}
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_commande_new') }}">Create new</a>
+{% endblock %}

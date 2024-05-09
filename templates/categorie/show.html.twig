@@ -1,0 +1,39 @@
+{% extends 'dashboard.html.twig' %}
+
+{% block title %}Categorie{% endblock %}
+    {% block nav %}
+    <li class="nav-item">
+      <a class="nav-link" href="{{ path('admin_produits_index')}}">
+        <i class="mdi mdi-grid-large menu-icon"></i>
+        <span class="menu-title">Produits</span>
+      </a>
+    </li>
+    <li class="nav-item active">
+      <a class="nav-link" href="{{ path('app_categorie_index')}}">
+        <i class="mdi mdi-grid-large menu-icon"></i>
+        <span class="menu-title">Categories</span>
+      </a>
+    </li>
+    {% endblock %}
+{% block body %}
+    <h1>Categorie</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ categorie.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ categorie.nom }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="w-100 btn btn-secondary" href="{{ path('app_categorie_index') }}">back to list</a>
+
+    <a  class="w-100 btn btn-information" href="{{ path('app_categorie_edit', {'id': categorie.id}) }}">edit</a>
+
+    {{ include('categorie/_delete_form.html.twig') }}
+{% endblock %}

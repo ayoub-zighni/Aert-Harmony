@@ -1,0 +1,285 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block body %}
+
+<style>
+  .chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh; /* Adjust if needed */
+  }
+
+  canvas {
+    max-width: 100%; /* Ensure canvas doesn't exceed container width */
+    max-height: 100%; /* Ensure canvas doesn't exceed container height */
+  }
+</style>
+
+
+
+<div class="chart-container">
+  <canvas id="myChart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const ctx = document.getElementById('myChart');
+
+  // Fetch data from Symfony endpoint
+  fetch('/api/galeries-data')
+    .then(response => response.json())
+    .then(data => {
+      new Chart(ctx, {
+        type: 'pie', // Change 'bar' to 'pie' for a pie chart or 'doughnut' for a doughnut chart
+        data: {
+          labels: data.labels,
+          datasets: [{
+            label: 'Capacity',
+            data: data.data,
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.5)',
+              'rgba(54, 162, 235, 0.5)',
+              'rgba(255, 206, 86, 0.5)',
+              'rgba(75, 192, 192, 0.5)',
+              'rgba(153, 102, 255, 0.5)',
+              'rgba(255, 159, 64, 0.5)'
+            ],
+            borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+              'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          plugins: {
+            legend: {
+              position: 'bottom', // Adjust position as needed
+            }
+          },
+          responsive: true,
+          maintainAspectRatio: false,
+          aspectRatio: 1, // Aspect ratio of the chart
+        }
+      });
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    });
+</script>
+
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Galeries List</h4>
+            <!-- Search input -->
+            <input type="text" id="searchInput" class="form-control" placeholder="Search...">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>#ID</th>
+                            <th>Nom</th>
+                            <th>Address</th>
+                            <th>City</th>
+                            <th>Country</th>
+                            <th>Capacity</th>
+                            <th>Actions</th>                
+                        </tr>
+                    </thead>
+                    <tbody id="galleryList">
+                        {% for galerie in galeries %}
+                            <tr>
+                                <td class="py-1">
+                                    <img src="{{ asset('contents/uploads/galeries/' ~ galerie.image) }}" alt="image" />
+                                </td>
+                                <td>{{ galerie.id }}</td>
+                                <td>{{ galerie.nom }}</td>
+                                <td>{{ galerie.adresse }}</td>
+                                <td>{{ galerie.ville }}</td>
+                                <td>{{ galerie.pays }}</td>
+                                <td>{{ galerie.capaciteMax }}</td>
+                                <td>
+                                    <a class="btn btn-info me-2" href="{{ path('edit_galery', {'idGalery' : galerie.id })}}">Edit</a>
+                                    <a class="btn btn-danger me-2" href="{{ path('delete_galery', {'idGalery' : galerie.id })}}">Delete</a>
+                                    <a class="btn btn-success me-2" href="{{ path('event_back', {'idGalery' : galerie.id })}}">Add Event</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagination avec des boutons</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<!-- Pagination -->
+<ul class="pagination" id="pagination">
+    <li class="page-item"><button class="btn btn-outline-danger" onclick="showPage(1)">1</button></li>
+    <li class="page-item"><button class="btn btn-outline-danger" onclick="showPage(2)">2</button></li>
+    <li class="page-item"><button class="btn btn-outline-danger" onclick="showPage(3)">3</button></li>
+</ul>
+
+<!-- JavaScript -->
+<script>
+    // Function to filter galleries based on user input
+    function filterGalleries() {
+        // Get input element and filter value
+        var input = document.getElementById('searchInput');
+        var filter = input.value.toUpperCase();
+
+        // Get gallery list
+        var tbody = document.getElementById('galleryList');
+        var tr = tbody.getElementsByTagName('tr');
+
+        // Loop through all gallery items, and hide those that don't match the search query
+        for (var i = 0; i < tr.length; i++) {
+            var td1 = tr[i].getElementsByTagName('td')[1]; // ID column
+            var td2 = tr[i].getElementsByTagName('td')[2]; // Nom column
+            var td3 = tr[i].getElementsByTagName('td')[3]; // Address column
+            var td4 = tr[i].getElementsByTagName('td')[4]; // City column
+            var td5 = tr[i].getElementsByTagName('td')[5]; // Country column
+            var td6 = tr[i].getElementsByTagName('td')[6]; // Capacity column
+            if (td1 && td2 && td3 && td4 && td5 && td6) {
+                var textValue1 = td1.textContent || td1.innerText;
+                var textValue2 = td2.textContent || td2.innerText;
+                var textValue3 = td3.textContent || td3.innerText;
+                var textValue4 = td4.textContent || td4.innerText;
+                var textValue5 = td5.textContent || td5.innerText;
+                var textValue6 = td6.textContent || td6.innerText;
+                if (textValue1.toUpperCase().indexOf(filter) > -1 ||
+                    textValue2.toUpperCase().indexOf(filter) > -1 ||
+                    textValue3.toUpperCase().indexOf(filter) > -1 ||
+                    textValue4.toUpperCase().indexOf(filter) > -1 ||
+                    textValue5.toUpperCase().indexOf(filter) > -1 ||
+                    textValue6.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = '';
+                } else {
+                    tr[i].style.display = 'none';
+                }
+            }
+        }
+        generatePagination(); // Update pagination after filtering
+    }
+
+    // Function to show galleries of the selected page
+    function showPage(pageNumber) {
+        var itemsPerPage = 3; // Number of items per page
+        var galleries = document.querySelectorAll('#galleryList tr');
+        var startIndex = (pageNumber - 1) * itemsPerPage;
+        var endIndex = startIndex + itemsPerPage;
+
+        for (var i = 0; i < galleries.length; i++) {
+            if (i >= startIndex && i < endIndex) {
+                galleries[i].style.display = '';
+            } else {
+                galleries[i].style.display = 'none';
+            }
+        }
+    }
+
+    // Function to generate pagination based on the number of galleries
+    function generatePagination() {
+        var totalGalleries = document.querySelectorAll('#galleryList tr').length;
+        var itemsPerPage = 3; // Number of items per page
+        var totalPages = Math.ceil(totalGalleries / itemsPerPage);
+        var paginationContainer = document.getElementById('pagination');
+        paginationContainer.innerHTML = '';
+
+        // Add page buttons
+        for (var i = 1; i <= totalPages; i++) {
+            var li = document.createElement('li');
+            var button = document.createElement('button');
+            button.textContent = i;
+            button.className = 'btn btn-outline-danger';
+            button.addEventListener('click', function() {
+                var pageNumber = parseInt(this.textContent);
+                showPage(pageNumber);
+            });
+            li.appendChild(button);
+            paginationContainer.appendChild(li);
+        }
+    }
+
+    // Event listener for the search input
+    document.getElementById('searchInput').addEventListener('input', filterGalleries);
+
+    // Initial call to show the first page and generate pagination
+    showPage(1);
+    generatePagination();
+</script>
+
+</body>
+</html>
+
+
+
+
+
+{% block form %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Add Galerie</h4>
+                    {{ form_start(addGalerieForm,{'attr':{'methode':'POST','novalidate': 'novalidate','class' : 'forms-sample'}}) }}
+                    <div class="form-group">
+                        <label for="exampleInputUsername1">Name</label>
+                        {{ form_widget(addGalerieForm.nom, {'attr': {'placeholder': 'Add a Name', 'class': 'form-control'}}) }}
+                        <span style="color: red;">{{ form_errors(addGalerieForm.nom,{'attr': {'style' : 'color: red;'}}) }}</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Address</label>
+                        {{ form_widget(addGalerieForm.adresse, {'attr': {'placeholder': 'Add Address', 'class': 'form-control'}}) }}
+                        <span style="color: red;">{{ form_errors(addGalerieForm.adresse,{'attr': {'style' : 'color: red;'}}) }}</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">City</label>
+                        {{ form_widget(addGalerieForm.ville, {'attr': {'placeholder': 'Add a city', 'class': 'form-control'}}) }}
+                        <span style="color: red;">{{ form_errors(addGalerieForm.ville,{'attr': {'style' : 'color: red;'}}) }}</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Country</label>
+                        {{ form_widget(addGalerieForm.pays, {'attr': {'placeholder': 'Add a country', 'class': 'form-control'}}) }}
+                        <span style="color: red;">{{ form_errors(addGalerieForm.pays,{'attr': {'style' : 'color: red;'}}) }}</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Capacity Max</label>
+                        {{ form_widget(addGalerieForm.capaciteMax, {'attr': {'placeholder': 'Capacity', 'class': 'form-control'}}) }}
+                        <span style="color: red;">{{ form_errors(addGalerieForm.capaciteMax,{'attr': {'style' : 'color: red;'}}) }}</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Image</label>
+                        {{ form_widget(addGalerieForm.image, {'attr': {'placeholder': 'Capacity', 'class': 'form-control'}}) }}
+                        <span style="color: red;">{{ form_errors(addGalerieForm.image,{'attr': {'style' : 'color: red;'}}) }}</span>
+                    </div>
+                    <button type="submit" class="btn btn-primary me-2">Submit</button>
+                    <button onclick="window.print()" class="btn btn-dark me-2">Imprimer</button>
+                </div>
+                {{ form_end(addGalerieForm) }}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'front/front.html.twig' %}
+
+{% block title %}Edit Commande{% endblock %}
+
+{% block body %}
+    <h1>Edit Commande</h1>
+
+    {{ include('livreur/form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('read') }}">back to list</a>
+
+    {{ include('livreur/delete.html.twig') }}
+{% endblock %}

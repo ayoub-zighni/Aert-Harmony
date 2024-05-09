@@ -1,0 +1,95 @@
+{% extends 'front/front.html.twig' %}
+
+{% block title %}Liste des livreurs{% endblock %}
+
+{% block body %}
+    <h1>Liste des livreurs</h1>
+
+    <div class="row mb-3">
+        <div class="col-lg-6">
+            <input type="text" class="form-control" id="searchInput" placeholder="Search...">
+        </div>
+         <div class="col-lg-6">
+    
+
+
+        </div>
+         <div class="btn-group" role="group" aria-label="Sort">
+    <a href="{{ path('trier', {'tri': 'alphabetic_asc'}) }}" class="btn btn-secondary">Nom <i class="fas fa-arrow-up"></i></a>
+    <a href="{{ path('trier', {'tri': 'alphabetic_desc'}) }}" class="btn btn-secondary">Nom  <i class="fas fa-arrow-down"></i></a>
+</div>
+  <!-- Ajouter le bouton de redirection vers la page de statistiques -->
+            <a href="{{ path('statistiques') }}" class="btn btn-primary">Statistiques</a>
+    </div>
+
+    <!-- Table to display search results -->
+    <table class="table" id="livreurTable">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Région</th>
+                <th>Email</th>
+                <th>Téléphone</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="searchResults">
+            {% for livreur in livreur %}
+
+                <tr>
+                    <td>{{ livreur.id }}</td>
+                    <td>{{ livreur.nom }}</td>
+                    <td>{{ livreur.prenom }}</td>
+                    <td>{{ livreur.region }}</td>
+                    <td>{{ livreur.email }}</td>
+                    <td>{{ livreur.telephone }}</td>
+                    <td>
+                  <!-- Bouton pour afficher le livreur -->
+       
+
+        <!-- Bouton pour modifier le livreur -->
+        <a href="{{ path('edit', {'id': livreur.id}) }}" class="btn btn-warning">Modifier</a>
+<form action="{{ path('delete', {'id': livreur.id}) }}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce livreur ?');">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ livreur.id) }}">
+            <button type="submit" class="btn btn-danger">Supprimer</button>
+        </form>
+
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">No records found</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table> 
+      <!-- Bouton pour générer le fichier Excel -->
+    <form action="{{ path('generate-excel') }}" method="post">
+        <button type="submit" class="btn btn-success">Exporter en Excel</button>
+    </form>
+
+ 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        // Function to handle search functionality
+        function search() {
+            var searchInput = document.getElementById('searchInput').value;
+
+            // Perform AJAX request to fetch search results
+            $.get('{{ path('app_search') }}', { query: searchInput }, function(response) {
+                $('#searchResults').html(response);
+            });
+        }
+
+
+        // Event listener for search input
+        document.getElementById('searchInput').addEventListener('input', function() {
+            search();
+        });
+ 
+
+    </script>
+{% endblock %}

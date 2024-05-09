@@ -1,0 +1,140 @@
+
+
+{% block title %}Statistiques des livreurs par région{% endblock %}
+
+{% block center %}
+    <div class="d-flex justify-content-center align-items-center" style="height: 90vh;">
+        <div class="chart-container" style="width: 550px; height: 400px;">
+            <canvas id="livreursByRegionChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Boutons de basculement -->
+    <div class="text-center mt-4">
+        <button class="btn btn-primary mr-3" onclick="showBarChart()">Bar Chart</button>
+        <button class="btn btn-primary" onclick="showPieChart()">Pie Chart</button>
+    </div>
+
+    <!-- Inclure la bibliothèque Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+
+    <script>
+        let livreursByRegionChart; // Variable globale pour stocker le graphe
+        
+        // Fonction pour afficher le graphique en barres
+        function showBarChart() {
+            // Destruction du graphique existant
+            if (livreursByRegionChart) {
+                livreursByRegionChart.destroy();
+            }
+            
+            // Récupérer les données depuis PHP (Twig)
+            const livreursByRegion  = {{ livreursByRegion|json_encode|raw }};
+            
+            // Extraire les régions et les nombres de livreurs
+            const regions = livreursByRegion.map(item => item.region);
+            const counts = livreursByRegion.map(item => item.livreur_count);
+
+            // Trouver le nombre maximum de livreurs pour définir l'échelle de l'axe des y
+            const maxCount = Math.max(...counts);
+
+            // Créer le graphe pour les livreurs par région
+            const ctxLivreursByRegion = document.getElementById('livreursByRegionChart').getContext('2d');
+            livreursByRegionChart = new Chart(ctxLivreursByRegion, {
+                type: 'bar',
+                data: {
+                    labels: regions, // Noms de région sur l'axe des x
+                    datasets: [{
+                        label: 'Nombre de livreurs', // Légende du dataset
+                        data: counts, // Nombre de livreurs sur l'axe des y
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: maxCount + 10, // Définir la valeur maximale de l'axe des y
+                            title: { // Titre de l'axe des y
+                                display: true,
+                                text: 'Nombre de livreurs'
+                            }
+                        },
+                        x: {
+                            title: { // Titre de l'axe des x
+                                display: true,
+                                text: 'Région'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Fonction pour afficher le graphique en pie chart
+        function showPieChart() {
+            // Destruction du graphique existant
+            if (livreursByRegionChart) {
+                livreursByRegionChart.destroy();
+            }
+            
+            // Récupérer les données depuis PHP (Twig)
+            const livreursByRegion = {{ livreursByRegion|json_encode|raw }};
+            
+            // Extraire les régions et les nombres de livreurs
+            const regions = livreursByRegion.map(item => item.region);
+            const counts = livreursByRegion.map(item => item.livreur_count);
+
+            // Créer le graphe pour les livreurs par région
+            const ctxLivreursByRegion = document.getElementById('livreursByRegionChart').getContext('2d');
+            livreursByRegionChart = new Chart(ctxLivreursByRegion, {
+                type: 'pie', // Changer le type de graphique en pie chart
+                data: {
+                    labels: regions, // Noms de région pour les parts du pie chart
+                    datasets: [{
+                        label: 'Nombre de livreurs', // Légende du dataset
+                        data: counts, // Nombre de livreurs pour chaque part du pie chart
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        // L'échelle n'est pas nécessaire pour un pie chart
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Répartition des livreurs par région'
+                        },
+                        legend: {
+                            display: true,
+                            position: 'bottom' // Position de la légende
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Appel initial pour afficher le graphique en barres au chargement de la page
+        showBarChart();
+    </script>
+
+{% endblock %}
